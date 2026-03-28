@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azalea Cruise — Luxury Yacht Maldives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #09131F;
+      --ocean:   #0A3D5C;
+      --teal:    #1A7B8A;
+      --aqua:    #3FB8C9;
+      --gold:    #C9A468;
+      --gold-lt: #E0C188;
+      --sand:    #F5EDD8;
+      --white:   #FFFFFF;
+      --gray:    #8A9099;
+      --light:   #F2F4F6;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Jost', 'Helvetica Neue', sans-serif;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--navy);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ── Typography ── */
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+
+    h1 { font-size: clamp(3rem, 7vw, 6.5rem); }
+    h2 { font-size: clamp(2.2rem, 4vw, 3.6rem); }
+    h3 { font-size: clamp(1.4rem, 2vw, 1.9rem); }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #4A5260;
+    }
+
+    /* ── Utility ── */
+    .container  { max-width: 1220px; margin: 0 auto; padding: 0 2rem; }
+    .section    { padding: 8rem 0; }
+    .section-sm { padding: 5rem 0; }
+    .text-white { color: var(--white); }
+    .text-white p { color: rgba(255,255,255,0.7); }
+    .divider    { width: 3rem; height: 1px; background: var(--gold); margin: 1.5rem 0; }
+    .divider-c  { margin: 1.5rem auto; }
+    .text-center { text-align: center; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border: 1px solid;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+      z-index: -1;
+    }
+
+    .btn:hover::before { transform: scaleX(1); }
+
+    .btn-gold {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: transparent;
+    }
+    .btn-gold::before { background: var(--gold); }
+    .btn-gold:hover   { color: var(--navy); }
+
+    .btn-white {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.5);
+      background: transparent;
+    }
+    .btn-white::before { background: var(--white); }
+    .btn-white:hover   { color: var(--navy); }
+
+    .btn-solid {
+      color: var(--navy);
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .btn-solid::before { background: var(--navy); border-color: var(--navy); }
+    .btn-solid:hover   { color: var(--white); border-color: var(--navy); }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.6rem 0;
+      transition: background var(--transition), padding var(--transition), backdrop-filter var(--transition);
+    }
+
+    nav.scrolled {
+      background: rgba(9, 19, 31, 0.92);
+      backdrop-filter: blur(20px);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(201, 164, 104, 0.15);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 100%;
+      height: 1px;
+      background: var(--gold);
+      transition: right var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { right: 0; }
+
+    .nav-cta {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.65rem 1.6rem;
+      transition: var(--transition);
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      width: 24px; height: 1px;
+      background: var(--white);
+      transition: var(--transition);
+    }
+
+    /* ── Scroll offset for fixed navbar ── */
+    #about, #experiences, #yacht, #destinations, #booking {
+      scroll-margin-top: 90px;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.6s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      animation: heroZoom 9s ease-out forwards;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(9,19,31,0.78) 0%, rgba(10,61,92,0.45) 50%, rgba(26,123,138,0.25) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1); }
+    }
+
+    /* Slide dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 4.5rem;
+      right: 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 3;
+    }
+
+    .hero-dot {
+      width: 28px;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.4s ease, width 0.4s ease;
+    }
+
+    .hero-dot.active {
+      background: var(--gold);
+      width: 44px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .hero-content .eyebrow {
+      animation: fadeUp 0.8s 0.3s both;
+    }
+
+    .hero-content h1 {
+      color: var(--white);
+      margin-top: 1rem;
+      font-style: italic;
+      animation: fadeUp 0.8s 0.5s both;
+    }
+
+    .hero-content h1 em {
+      font-style: normal;
+      color: var(--gold-lt);
+    }
+
+    .hero-tagline {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 480px;
+      margin-top: 1.5rem;
+      animation: fadeUp 0.8s 0.7s both;
+      font-family: var(--font-sans);
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+      animation: fadeUp 0.8s 0.9s both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: fadeUp 1s 1.2s both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.5; transform: scaleY(1); }
+      50%      { opacity: 1;   transform: scaleY(1.2); }
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      background: var(--navy);
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(201,164,104,0.2);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0 1rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-top: 0.4rem;
+    }
+
+    /* ── About ── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: -3rem;
+      right: -2.5rem;
+      width: 55%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border: 6px solid var(--white);
+    }
+
+    .about-text .eyebrow { margin-bottom: 0.8rem; }
+
+    .about-text p { margin-top: 1.2rem; }
+
+    .about-signature {
+      margin-top: 2rem;
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--navy);
+      opacity: 0.6;
+    }
+
+    /* ── Experiences ── */
+    #experiences {
+      background: var(--navy);
+    }
+
+    .exp-header {
+      max-width: 580px;
+      margin: 0 auto;
+      margin-bottom: 5rem;
+    }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+
+    .exp-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+
+    .exp-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .exp-card:hover img { transform: scale(1.06); }
+
+    .exp-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(9,19,31,0.9) 0%, rgba(9,19,31,0.2) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .exp-card:hover .exp-card-overlay {
+      background: linear-gradient(to top, rgba(9,19,31,0.95) 0%, rgba(9,19,31,0.5) 60%, rgba(10,61,92,0.2) 100%);
+    }
+
+    .exp-number {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(201,164,104,0.25);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-card h3 { color: var(--white); font-size: 1.5rem; }
+
+    .exp-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-top: 0.7rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .exp-card:hover .exp-desc {
+      max-height: 100px;
+      opacity: 1;
+    }
+
+    .exp-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+
+    .exp-card:hover .exp-link {
+      max-height: 40px;
+      opacity: 1;
+    }
+
+    /* ── Yacht ── */
+    #yacht {
+      background: var(--light);
+    }
+
+    .yacht-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .yacht-text .eyebrow { margin-bottom: 0.8rem; }
+    .yacht-text p { margin-top: 1rem; }
+
+    .spec-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .spec-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .spec-value {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--navy);
+    }
+
+    .yacht-visuals {
+      position: relative;
+    }
+
+    .yacht-img-main {
+      width: 100%;
+      aspect-ratio: 5/4;
+      object-fit: cover;
+    }
+
+    .yacht-img-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .yacht-img-strip img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+    }
+
+    /* ── Destinations ── */
+    #destinations {
+      overflow: hidden;
+    }
+
+    .dest-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .dest-scroll {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1.5rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .dest-scroll::-webkit-scrollbar { display: none; }
+
+    .dest-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .dest-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .dest-card:hover img { transform: scale(1.05); }
+
+    .dest-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(9,19,31,0.85));
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .dest-label h3 {
+      color: var(--white);
+      font-size: 1.3rem;
+    }
+
+    .dest-label p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Testimonials ── */
+    #testimonials {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #testimonials::before {
+      content: '"';
+      position: absolute;
+      top: -2rem;
+      left: 3rem;
+      font-family: var(--font-serif);
+      font-size: 30rem;
+      color: rgba(201,164,104,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+
+    .testi-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,164,104,0.12);
+      padding: 2.5rem;
+      transition: var(--transition);
+    }
+
+    .testi-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(201,164,104,0.3);
+    }
+
+    .stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1.5rem;
+    }
+
+    .star {
+      width: 10px; height: 10px;
+      background: var(--gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .testi-text {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.75;
+    }
+
+    .testi-author {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(201,164,104,0.3);
+    }
+
+    .testi-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .testi-origin {
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Booking ── */
+    #booking {
+      background: linear-gradient(135deg, var(--ocean) 0%, var(--navy) 60%),
+                  url('https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg') center/cover no-repeat;
+      background-blend-mode: multiply;
+    }
+
+    .booking-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .booking-form {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,164,104,0.15);
+      padding: 3rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color var(--transition);
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select option {
+      background: var(--navy);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* ── Contact strip ── */
+    .contact-strip {
+      background: var(--gold);
+      padding: 1.5rem 0;
+    }
+
+    .contact-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .contact-strip-text {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--navy);
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .contact-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(9,19,31,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-detail-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(9,19,31,0.55);
+    }
+
+    .contact-detail-val {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy);
+      padding: 5rem 0 2rem;
+      border-top: 1px solid rgba(201,164,104,0.1);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-brand .nav-logo {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.8;
+      max-width: 280px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.8rem;
+    }
+
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,164,104,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.78rem;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,164,104,0.08);
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-legal a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      transition: color var(--transition);
+    }
+
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Mobile Menu ── */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu a {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--white);
+      font-style: italic;
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      #about .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-accent { right: -1rem; }
+      .yacht-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .booking-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .dest-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .exp-card { aspect-ratio: 4/3; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-strip-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .contact-info { flex-direction: column; gap: 1rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .booking-form { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">
+        Azalea<span>.</span>Cruise
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#yacht">The Yacht</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#booking">Enquire</a></li>
+      </ul>
+
+      <a href="tel:+9607781881" class="nav-cta">+960 778 1881</a>
+
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about"        onclick="toggleMenu()">About</a>
+    <a href="#experiences"  onclick="toggleMenu()">Experiences</a>
+    <a href="#yacht"        onclick="toggleMenu()">The Yacht</a>
+    <a href="#destinations" onclick="toggleMenu()">Destinations</a>
+    <a href="#booking"      onclick="toggleMenu()">Enquire</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1920&q=85&auto=format')"></div>
+      <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/00c9d0_8bc0d55e004a4648b15be729c22389af~mv2.png')"></div>
+      <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg')"></div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-dots">
+      <span class="hero-dot active"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <p class="eyebrow">Luxury Yacht Experience · Maldives</p>
+        <h1>Sail into the <em>Heart</em> of Paradise</h1>
+        <p class="hero-tagline">
+          Discover the Maldives aboard Azalea — an intimate luxury yacht offering
+          bespoke island-hopping adventures through the world's most pristine waters.
+        </p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-solid">Book Your Voyage</a>
+          <a href="#experiences" class="btn btn-white">Explore Experiences</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       STATS
+  ═══════════════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Voyages Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">26</div>
+          <div class="stat-label">Islands Visited</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Guest Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       ABOUT
+  ═══════════════════════════════════════ -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images reveal">
+          <img
+            class="about-img-main"
+            src="https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg"
+            alt="Azalea Cruise Yacht in the Maldives"
+          />
+          <img
+            class="about-img-accent"
+            src="https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg"
+            alt="Azalea yacht at night"
+          />
+        </div>
+
+        <div class="about-text reveal reveal-delay-2">
+          <p class="eyebrow">Our Story</p>
+          <h2>Where Luxury Meets the Open Sea</h2>
+          <div class="divider"></div>
+          <p>
+            Azalea Cruise was born from a deep love of the Maldives and a desire to share
+            its extraordinary beauty in the most intimate way possible. Our handcrafted
+            itineraries take you far beyond the resort islands, into untouched atolls
+            and coral sanctuaries few visitors ever witness.
+          </p>
+          <p>
+            Aboard our meticulously appointed yacht, every detail is considered —
+            from sunrise dive expeditions and sunset dolphin cruises to private beach
+            dinners under a canopy of stars. This is the Maldives as it was meant to be experienced.
+          </p>
+          <div class="about-signature">Azalea Cruise</div>
+          <br/>
+          <a href="#experiences" class="btn btn-gold">Discover Our Experiences</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       EXPERIENCES
+  ═══════════════════════════════════════ -->
+  <section id="experiences" class="section text-white">
+    <div class="container">
+      <div class="exp-header text-center reveal">
+        <p class="eyebrow">Curated Experiences</p>
+        <h2 style="color:var(--white);">Life Aboard Azalea</h2>
+        <div class="divider divider-c"></div>
+        <p>Every moment is crafted to immerse you in the wonder of the Maldivian ocean.</p>
+      </div>
+
+      <div class="exp-grid">
+        <div class="exp-card reveal">
+          <img
+            src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800&q=85&auto=format"
+            alt="Scuba diving coral reef Maldives"
+          />
+          <div class="exp-card-overlay">
+            <div class="exp-number">01</div>
+            <h3>Reef & Dive</h3>
+            <p class="exp-desc">Explore vibrant coral gardens with expert guides in crystal-clear Maldivian waters.</p>
+            <span class="exp-link">Learn more →</span>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-1">
+          <img
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85&auto=format"
+            alt="Private fine dining experience"
+          />
+          <div class="exp-card-overlay">
+            <div class="exp-number">02</div>
+            <h3>Private Dining</h3>
+            <p class="exp-desc">Bespoke seafood menus prepared by our chef, served on secluded sandbars at sunset.</p>
+            <span class="exp-link">Learn more →</span>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-2">
+          <img
+            src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=800&q=85&auto=format"
+            alt="Dolphins in the Maldives ocean"
+          />
+          <div class="exp-card-overlay">
+            <div class="exp-number">03</div>
+            <h3>Dolphin Cruise</h3>
+            <p class="exp-desc">Sail at golden hour alongside spinner dolphins in their natural Maldivian habitat.</p>
+            <span class="exp-link">Learn more →</span>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-3">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=85&auto=format"
+            alt="Maldives tropical island beach"
+          />
+          <div class="exp-card-overlay">
+            <div class="exp-number">04</div>
+            <h3>Island Hopping</h3>
+            <p class="exp-desc">Chart a course through remote atolls, local fishing villages and pristine beaches.</p>
+            <span class="exp-link">Learn more →</span>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-1">
+          <img
+            src="https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg"
+            alt="Azalea yacht at night"
+          />
+          <div class="exp-card-overlay">
+            <div class="exp-number">05</div>
+            <h3>Deck Wellness</h3>
+            <p class="exp-desc">Sunrise yoga, in-cabin massages and wellness rituals designed for total rejuvenation.</p>
+            <span class="exp-link">Learn more →</span>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-2">
+          <img
+            src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=800&q=85&auto=format"
+            alt="Stargazing night sky at sea"
+          />
+          <div class="exp-card-overlay">
+            <div class="exp-number">06</div>
+            <h3>Stargazing at Sea</h3>
+            <p class="exp-desc">Far from city lights, experience some of the world's most breathtaking night skies.</p>
+            <span class="exp-link">Learn more →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       THE YACHT
+  ═══════════════════════════════════════ -->
+  <section id="yacht" class="section">
+    <div class="container">
+      <div class="yacht-grid">
+        <div class="yacht-text reveal">
+          <p class="eyebrow">The Vessel</p>
+          <h2>The Azalea</h2>
+          <div class="divider"></div>
+          <p>
+            A masterpiece of naval craftsmanship, Azalea was purpose-built for the Maldivian
+            archipelago. Her shallow draft allows access to the most secluded lagoons, while
+            her spacious decks and refined interiors ensure your comfort never wavers.
+          </p>
+          <p>
+            Accommodating up to eight guests in four elegantly appointed cabins, every inch
+            of Azalea reflects our commitment to providing an unparalleled experience at sea.
+          </p>
+          <ul class="spec-list">
+            <li class="spec-item">
+              <span class="spec-label">Length</span>
+              <span class="spec-value">28 metres</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Capacity</span>
+              <span class="spec-value">Up to 8 guests</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Cabins</span>
+              <span class="spec-value">4 en-suite cabins</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Crew</span>
+              <span class="spec-value">Expert crew of 5</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Range</span>
+              <span class="spec-value">All Maldivian atolls</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-label">Season</span>
+              <span class="spec-value">Year-round</span>
+            </li>
+          </ul>
+          <br/>
+          <a href="#booking" class="btn btn-gold">Request a Proposal</a>
+        </div>
+
+        <div class="yacht-visuals reveal reveal-delay-2">
+          <img
+            class="yacht-img-main"
+            src="https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg"
+            alt="Azalea yacht aerial view"
+          />
+          <div class="yacht-img-strip">
+            <img
+              src="https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg"
+              alt="Azalea yacht at night with lights"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80&auto=format"
+              alt="Scuba diving Maldives coral reef"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DESTINATIONS
+  ═══════════════════════════════════════ -->
+  <section id="destinations" class="section">
+    <div class="container">
+      <div class="dest-intro reveal">
+        <div>
+          <p class="eyebrow">Where We Sail</p>
+          <h2>Destinations</h2>
+          <div class="divider"></div>
+        </div>
+        <div>
+          <p>
+            From the bustling Male Atoll to the remote southern atolls, our itineraries
+            span the full breadth of this island nation. Let us design your perfect route.
+          </p>
+          <br/>
+          <a href="#booking" class="btn btn-gold">Plan Your Route</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="dest-scroll reveal">
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=85&auto=format"
+            alt="North Malé Atoll"
+          />
+          <div class="dest-label">
+            <h3>North Malé Atoll</h3>
+            <p>Gateway to Paradise</p>
+          </div>
+        </div>
+
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=500&q=85&auto=format"
+            alt="Baa Atoll"
+          />
+          <div class="dest-label">
+            <h3>Baa Atoll</h3>
+            <p>UNESCO Biosphere Reserve</p>
+          </div>
+        </div>
+
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1544020452-0012011b76ae?w=500&q=85&auto=format"
+            alt="Ari Atoll"
+          />
+          <div class="dest-label">
+            <h3>Ari Atoll</h3>
+            <p>Whale Shark Country</p>
+          </div>
+        </div>
+
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=500&q=85&auto=format"
+            alt="Addu Atoll"
+          />
+          <div class="dest-label">
+            <h3>Addu Atoll</h3>
+            <p>The Equatorial Jewel</p>
+          </div>
+        </div>
+
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=500&q=85&auto=format"
+            alt="Lhaviyani Atoll"
+          />
+          <div class="dest-label">
+            <h3>Lhaviyani Atoll</h3>
+            <p>Pristine Reefs &amp; Beaches</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════ -->
+  <section id="testimonials" class="section text-white">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:4rem;">
+        <p class="eyebrow">Guest Stories</p>
+        <h2 style="color:var(--white);">What Our Guests Say</h2>
+        <div class="divider divider-c"></div>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testi-card reveal">
+          <div class="stars">
+            <div class="star"></div><div class="star"></div><div class="star"></div>
+            <div class="star"></div><div class="star"></div>
+          </div>
+          <p class="testi-text">
+            "Seven days aboard Azalea was the most extraordinary travel experience of my life.
+            The crew's knowledge of the Maldives is unparalleled — every dive site,
+            every sandbar felt like a secret only they knew."
+          </p>
+          <div class="testi-author">
+            <img
+              class="testi-avatar"
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+              alt="Sarah M."
+            />
+            <div>
+              <div class="testi-name">Sarah Mitchell</div>
+              <div class="testi-origin">London, UK</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="stars">
+            <div class="star"></div><div class="star"></div><div class="star"></div>
+            <div class="star"></div><div class="star"></div>
+          </div>
+          <p class="testi-text">
+            "The private sandbar dinner was like something out of a dream. Our chef prepared
+            fresh lobster as the sun melted into the Indian Ocean. Azalea turns
+            the Maldives into pure magic."
+          </p>
+          <div class="testi-author">
+            <img
+              class="testi-avatar"
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80"
+              alt="James K."
+            />
+            <div>
+              <div class="testi-name">James &amp; Priya Kumar</div>
+              <div class="testi-origin">Singapore</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="stars">
+            <div class="star"></div><div class="star"></div><div class="star"></div>
+            <div class="star"></div><div class="star"></div>
+          </div>
+          <p class="testi-text">
+            "We've visited the Maldives three times before, but Azalea showed us a version
+            we never knew existed. The remote atolls, the silence, the stars at night —
+            it was deeply humbling."
+          </p>
+          <div class="testi-author">
+            <img
+              class="testi-avatar"
+              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80"
+              alt="Emma T."
+            />
+            <div>
+              <div class="testi-name">Emma Thornton</div>
+              <div class="testi-origin">Sydney, Australia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       BOOKING
+  ═══════════════════════════════════════ -->
+  <section id="booking" class="section text-white">
+    <div class="container">
+      <div class="booking-inner">
+        <div class="reveal">
+          <p class="eyebrow">Plan Your Escape</p>
+          <h2 style="color:var(--white);">Begin Your Voyage</h2>
+          <div class="divider"></div>
+          <p>
+            Every Azalea experience is fully bespoke. Share your vision and our team
+            will craft a tailor-made itinerary, from one night to a full week
+            exploring the archipelago at your own pace.
+          </p>
+          <br/>
+          <p>
+            Charters are available for couples, families and small groups of up to
+            eight guests. We operate year-round across all Maldivian atolls.
+          </p>
+          <br/><br/>
+          <div class="contact-item" style="color:var(--white);">
+            <div class="contact-icon" style="border-color:rgba(201,164,104,0.4); color:var(--gold);">✆</div>
+            <div class="contact-detail">
+              <span class="contact-detail-label" style="color:var(--gold);">Call us</span>
+              <a href="tel:+9607781881" class="contact-detail-val" style="color:var(--white);">+960 778 1881</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-form reveal reveal-delay-2">
+          <p class="eyebrow" style="margin-bottom:1.5rem;">Enquiry Form</p>
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" placeholder="James" required />
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Kumar" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="james@example.com" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Arrival Date</label>
+                <input type="date" required />
+              </div>
+              <div class="form-group">
+                <label>Duration</label>
+                <select>
+                  <option value="">Select duration</option>
+                  <option>1 Night</option>
+                  <option>2 Nights</option>
+                  <option>3 Nights</option>
+                  <option>5 Nights</option>
+                  <option>7 Nights</option>
+                  <option>Custom</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Guests</label>
+                <select>
+                  <option>2 guests</option>
+                  <option>3–4 guests</option>
+                  <option>5–6 guests</option>
+                  <option>7–8 guests</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Experience</label>
+                <select>
+                  <option>Island Hopping</option>
+                  <option>Diving &amp; Snorkelling</option>
+                  <option>Romantic Escape</option>
+                  <option>Family Adventure</option>
+                  <option>Custom Itinerary</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Special Requests</label>
+              <textarea placeholder="Tell us about your dream Maldives experience…"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-solid" style="width:100%; justify-content:center;">
+              Send Enquiry
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT STRIP
+  ═══════════════════════════════════════ -->
+  <div class="contact-strip">
+    <div class="container contact-strip-inner">
+      <span class="contact-strip-text">Ready to set sail? We'd love to hear from you.</span>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">✆</div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Phone</span>
+            <a href="tel:+9607781881" class="contact-detail-val">+960 778 1881</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-val">info@azaleacruise.com</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⚓</div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Home Port</span>
+            <span class="contact-detail-val">Malé, Maldives</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">Azalea<span>.</span>Cruise</div>
+          <p>
+            Luxury private yacht charters through the extraordinary islands and
+            atolls of the Maldives. Crafting unforgettable ocean experiences since 2012.
+          </p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram">in</a>
+            <a href="#" class="social-link" aria-label="Facebook">f</a>
+            <a href="#" class="social-link" aria-label="TripAdvisor">t</a>
+            <a href="#" class="social-link" aria-label="WhatsApp">w</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About Azalea</a></li>
+            <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#yacht">The Yacht</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Experiences</h4>
+          <ul class="footer-links">
+            <li><a href="#experiences">Reef &amp; Dive</a></li>
+            <li><a href="#experiences">Private Dining</a></li>
+            <li><a href="#experiences">Dolphin Cruise</a></li>
+            <li><a href="#experiences">Island Hopping</a></li>
+            <li><a href="#experiences">Deck Wellness</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+9607781881">+960 778 1881</a></li>
+            <li><a href="mailto:info@azaleacruise.com">info@azaleacruise.com</a></li>
+            <li><a href="#booking">Make an Enquiry</a></li>
+            <li><a href="#booking">Request Brochure</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Azalea Cruise. All rights reserved. Malé, Maldives.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════ -->
+  <script>
+    // ── Scroll reveal ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Hero slideshow ──
+    const slides   = document.querySelectorAll('.hero-slide');
+    const dots     = document.querySelectorAll('.hero-dot');
+    let   current  = 0;
+    let   timer;
+
+    function goToSlide(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function startTimer() {
+      timer = setInterval(() => goToSlide(current + 1), 5500);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer);
+        goToSlide(i);
+        startTimer();
+      });
+    });
+
+    startTimer();
+
+    // ── Sticky nav ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Mobile menu ──
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // ── Form submit ──
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('[type="submit"]');
+      btn.textContent = 'Enquiry Sent ✓';
+      btn.style.borderColor = '#3FB8C9';
+      btn.style.background  = '#3FB8C9';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
