@@ -1057,6 +1057,123 @@
 </head>
 <body>
 
+  <script>
+    (async function () {
+      document.body.style.visibility = 'hidden';
+      let c;
+      try {
+        const res = await fetch('/content.json');
+        if (!res.ok) throw new Error('not found');
+        c = await res.json();
+      } catch (e) {
+        document.body.style.visibility = 'visible';
+        return;
+      }
+      renderContent(c);
+      document.body.style.visibility = 'visible';
+    })();
+
+    function renderContent(c) {
+      const q  = (s) => document.querySelector(s);
+      const qq = (s) => document.querySelectorAll(s);
+
+      // Site contact
+      qq('.phone-link').forEach(el => { el.textContent = c.site.phone; el.href = c.site.phone_href; });
+      qq('.email-val').forEach(el => {
+        el.textContent = c.site.email;
+        if (el.tagName === 'A') el.href = 'mailto:' + c.site.email;
+      });
+      qq('.port-val').forEach(el => el.textContent = c.site.home_port);
+
+      // Hero text
+      q('[data-cms="hero-eyebrow"]').textContent = c.hero.eyebrow;
+      q('[data-cms="hero-heading"]').innerHTML   = c.hero.heading;
+      q('[data-cms="hero-tagline"]').textContent = c.hero.tagline;
+
+      // Hero slides — rebuild from slide_1..slide_4
+      const heroBg  = q('.hero-bg');
+      const overlay = heroBg.querySelector('.hero-overlay');
+      heroBg.querySelectorAll('.hero-slide').forEach(s => s.remove());
+      const dotsEl = q('.hero-dots');
+      dotsEl.innerHTML = '';
+      ['slide_1', 'slide_2', 'slide_3', 'slide_4'].forEach((key, i) => {
+        const div = document.createElement('div');
+        div.className = 'hero-slide' + (i === 0 ? ' active' : '');
+        div.style.backgroundImage = `url('${c.hero[key]}')`;
+        heroBg.insertBefore(div, overlay);
+        const dot = document.createElement('span');
+        dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+        dotsEl.appendChild(dot);
+      });
+
+      // Stats
+      qq('.stat-item').forEach((el, i) => {
+        if (!c.stats[i]) return;
+        el.querySelector('.stat-number').textContent = c.stats[i].number;
+        el.querySelector('.stat-label').textContent  = c.stats[i].label;
+      });
+
+      // About
+      q('[data-cms="about-eyebrow"]').textContent = c.about.eyebrow;
+      q('[data-cms="about-heading"]').textContent = c.about.heading;
+      q('[data-cms="about-body-1"]').textContent  = c.about.body_1;
+      q('[data-cms="about-body-2"]').textContent  = c.about.body_2;
+      q('.about-img-main').src   = c.about.image_main;
+      q('.about-img-accent').src = c.about.image_accent;
+
+      // Experiences
+      qq('.exp-card').forEach((card, i) => {
+        if (!c.experiences[i]) return;
+        card.querySelector('img').src              = c.experiences[i].image;
+        card.querySelector('img').alt              = c.experiences[i].title;
+        card.querySelector('h3').textContent       = c.experiences[i].title;
+        card.querySelector('.exp-desc').textContent = c.experiences[i].description;
+      });
+
+      // Yacht
+      q('[data-cms="yacht-eyebrow"]').textContent = c.yacht.eyebrow;
+      q('[data-cms="yacht-heading"]').textContent = c.yacht.heading;
+      q('[data-cms="yacht-body-1"]').textContent  = c.yacht.body_1;
+      q('[data-cms="yacht-body-2"]').textContent  = c.yacht.body_2;
+      qq('.spec-item').forEach((el, i) => {
+        if (!c.yacht.specs[i]) return;
+        el.querySelector('.spec-label').textContent = c.yacht.specs[i].label;
+        el.querySelector('.spec-value').textContent = c.yacht.specs[i].value;
+      });
+      q('.yacht-img-main').src = c.yacht.image_main;
+      const strips = qq('.yacht-img-strip img');
+      if (strips[0]) strips[0].src = c.yacht.image_strip_1;
+      if (strips[1]) strips[1].src = c.yacht.image_strip_2;
+
+      // Destinations
+      qq('.dest-card').forEach((card, i) => {
+        if (!c.destinations[i]) return;
+        card.querySelector('img').src       = c.destinations[i].image;
+        card.querySelector('img').alt       = c.destinations[i].name;
+        card.querySelector('h3').textContent = c.destinations[i].name;
+        card.querySelector('p').textContent  = c.destinations[i].subtitle;
+      });
+
+      // Testimonials
+      qq('.testi-card').forEach((card, i) => {
+        if (!c.testimonials[i]) return;
+        card.querySelector('.testi-text').textContent   = `"${c.testimonials[i].quote}"`;
+        card.querySelector('.testi-avatar').src         = c.testimonials[i].avatar;
+        card.querySelector('.testi-name').textContent   = c.testimonials[i].name;
+        card.querySelector('.testi-origin').textContent = c.testimonials[i].origin;
+      });
+
+      // Booking
+      q('[data-cms="booking-eyebrow"]').textContent = c.booking.eyebrow;
+      q('[data-cms="booking-heading"]').innerHTML   = c.booking.heading;
+      q('[data-cms="booking-body-1"]').textContent  = c.booking.body_1;
+      q('[data-cms="booking-body-2"]').textContent  = c.booking.body_2;
+
+      // Re-init slideshow with new slides/dots
+      if (window.initSlideshow) window.initSlideshow();
+    }
+  </script>
+
   <!-- ═══════════════════════════════════════
        NAVIGATION
   ═══════════════════════════════════════ -->
@@ -1074,7 +1191,7 @@
         <li><a href="#booking">Enquire</a></li>
       </ul>
 
-      <a href="tel:+9607781881" class="nav-cta">+960 778 1881</a>
+      <a href="tel:+9607781881" class="nav-cta phone-link">+960 778 1881</a>
 
       <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
@@ -1110,9 +1227,9 @@
     </div>
     <div class="container">
       <div class="hero-content">
-        <p class="eyebrow">Luxury Yacht Experience · Maldives</p>
-        <h1>Sail into the <em>Heart</em> of Paradise</h1>
-        <p class="hero-tagline">
+        <p class="eyebrow" data-cms="hero-eyebrow">Luxury Yacht Experience · Maldives</p>
+        <h1 data-cms="hero-heading">Sail into the <em>Heart</em> of Paradise</h1>
+        <p class="hero-tagline" data-cms="hero-tagline">
           Discover the Maldives aboard Azalea — an intimate luxury yacht offering
           bespoke island-hopping adventures through the world's most pristine waters.
         </p>
@@ -1174,16 +1291,16 @@
         </div>
 
         <div class="about-text reveal reveal-delay-2">
-          <p class="eyebrow">Our Story</p>
-          <h2>Where Luxury Meets the Open Sea</h2>
+          <p class="eyebrow" data-cms="about-eyebrow">Our Story</p>
+          <h2 data-cms="about-heading">Where Luxury Meets the Open Sea</h2>
           <div class="divider"></div>
-          <p>
+          <p data-cms="about-body-1">
             Azalea Cruise was born from a deep love of the Maldives and a desire to share
             its extraordinary beauty in the most intimate way possible. Our handcrafted
             itineraries take you far beyond the resort islands, into untouched atolls
             and coral sanctuaries few visitors ever witness.
           </p>
-          <p>
+          <p data-cms="about-body-2">
             Aboard our meticulously appointed yacht, every detail is considered —
             from sunrise dive expeditions and sunset dolphin cruises to private beach
             dinners under a canopy of stars. This is the Maldives as it was meant to be experienced.
@@ -1297,15 +1414,15 @@
     <div class="container">
       <div class="yacht-grid">
         <div class="yacht-text reveal">
-          <p class="eyebrow">The Vessel</p>
-          <h2>The Azalea</h2>
+          <p class="eyebrow" data-cms="yacht-eyebrow">The Vessel</p>
+          <h2 data-cms="yacht-heading">The Azalea</h2>
           <div class="divider"></div>
-          <p>
+          <p data-cms="yacht-body-1">
             A masterpiece of naval craftsmanship, Azalea was purpose-built for the Maldivian
             archipelago. Her shallow draft allows access to the most secluded lagoons, while
             her spacious decks and refined interiors ensure your comfort never wavers.
           </p>
-          <p>
+          <p data-cms="yacht-body-2">
             Accommodating up to eight guests in four elegantly appointed cabins, every inch
             of Azalea reflects our commitment to providing an unparalleled experience at sea.
           </p>
@@ -1533,16 +1650,16 @@
     <div class="container">
       <div class="booking-inner">
         <div class="reveal">
-          <p class="eyebrow">Plan Your Escape</p>
-          <h2 style="color:var(--white);">Begin Your Voyage</h2>
+          <p class="eyebrow" data-cms="booking-eyebrow">Plan Your Escape</p>
+          <h2 style="color:var(--white);" data-cms="booking-heading">Begin Your Voyage</h2>
           <div class="divider"></div>
-          <p>
+          <p data-cms="booking-body-1">
             Every Azalea experience is fully bespoke. Share your vision and our team
             will craft a tailor-made itinerary, from one night to a full week
             exploring the archipelago at your own pace.
           </p>
           <br/>
-          <p>
+          <p data-cms="booking-body-2">
             Charters are available for couples, families and small groups of up to
             eight guests. We operate year-round across all Maldivian atolls.
           </p>
@@ -1551,7 +1668,7 @@
             <div class="contact-icon" style="border-color:rgba(201,164,104,0.4); color:var(--gold);">✆</div>
             <div class="contact-detail">
               <span class="contact-detail-label" style="color:var(--gold);">Call us</span>
-              <a href="tel:+9607781881" class="contact-detail-val" style="color:var(--white);">+960 778 1881</a>
+              <a href="tel:+9607781881" class="contact-detail-val phone-link" style="color:var(--white);">+960 778 1881</a>
             </div>
           </div>
         </div>
@@ -1641,21 +1758,21 @@
           <div class="contact-icon">✆</div>
           <div class="contact-detail">
             <span class="contact-detail-label">Phone</span>
-            <a href="tel:+9607781881" class="contact-detail-val">+960 778 1881</a>
+            <a href="tel:+9607781881" class="contact-detail-val phone-link">+960 778 1881</a>
           </div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">✉</div>
           <div class="contact-detail">
             <span class="contact-detail-label">Email</span>
-            <span class="contact-detail-val">info@azaleacruise.com</span>
+            <span class="contact-detail-val email-val">info@azaleacruise.com</span>
           </div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">⚓</div>
           <div class="contact-detail">
             <span class="contact-detail-label">Home Port</span>
-            <span class="contact-detail-val">Malé, Maldives</span>
+            <span class="contact-detail-val port-val">Malé, Maldives</span>
           </div>
         </div>
       </div>
@@ -1706,8 +1823,8 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <ul class="footer-links">
-            <li><a href="tel:+9607781881">+960 778 1881</a></li>
-            <li><a href="mailto:info@azaleacruise.com">info@azaleacruise.com</a></li>
+            <li><a href="tel:+9607781881" class="phone-link">+960 778 1881</a></li>
+            <li><a href="mailto:info@azaleacruise.com" class="email-val">info@azaleacruise.com</a></li>
             <li><a href="#booking">Make an Enquiry</a></li>
             <li><a href="#booking">Request Brochure</a></li>
           </ul>
@@ -1745,32 +1862,38 @@
     revealEls.forEach(el => observer.observe(el));
 
     // ── Hero slideshow ──
-    const slides   = document.querySelectorAll('.hero-slide');
-    const dots     = document.querySelectorAll('.hero-dot');
-    let   current  = 0;
-    let   timer;
+    let _slideTimer;
 
-    function goToSlide(n) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = (n + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-    }
+    window.initSlideshow = function () {
+      clearInterval(_slideTimer);
+      const slides  = document.querySelectorAll('.hero-slide');
+      const dots    = document.querySelectorAll('.hero-dot');
+      let   current = 0;
 
-    function startTimer() {
-      timer = setInterval(() => goToSlide(current + 1), 5500);
-    }
+      function goToSlide(n) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
 
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        clearInterval(timer);
-        goToSlide(i);
-        startTimer();
+      function startTimer() {
+        _slideTimer = setInterval(() => goToSlide(current + 1), 5500);
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          clearInterval(_slideTimer);
+          goToSlide(i);
+          startTimer();
+        });
       });
-    });
 
-    startTimer();
+      startTimer();
+    };
+
+    initSlideshow();
 
     // ── Sticky nav ──
     const navbar = document.getElementById('navbar');

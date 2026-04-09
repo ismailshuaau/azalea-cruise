@@ -1,0 +1,115 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Site Content"
+    files:
+      - name: "all"
+        label: "All Content"
+        file: "content.json"
+        fields:
+          - label: "Contact Info"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Phone (display)", name: "phone", widget: "string" }
+              - { label: "Phone (href, e.g. tel:+9607781881)", name: "phone_href", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Home Port", name: "home_port", widget: "string" }
+
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow text", name: "eyebrow", widget: "string" }
+              - { label: "Heading (use <em>word</em> for italic gold)", name: "heading", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "text" }
+              - { label: "Slide 1", name: "slide_1", widget: "image" }
+              - { label: "Slide 2", name: "slide_2", widget: "image" }
+              - { label: "Slide 3", name: "slide_3", widget: "image" }
+              - { label: "Slide 4", name: "slide_4", widget: "image" }
+
+          - label: "Stats Bar"
+            name: "stats"
+            widget: "list"
+            min: 4
+            max: 4
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Paragraph 1", name: "body_1", widget: "text" }
+              - { label: "Paragraph 2", name: "body_2", widget: "text" }
+              - { label: "Main image", name: "image_main", widget: "image" }
+              - { label: "Accent image", name: "image_accent", widget: "image" }
+
+          - label: "Experiences"
+            name: "experiences"
+            widget: "list"
+            min: 6
+            max: 6
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+
+          - label: "The Yacht"
+            name: "yacht"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Paragraph 1", name: "body_1", widget: "text" }
+              - { label: "Paragraph 2", name: "body_2", widget: "text" }
+              - label: "Specs"
+                name: "specs"
+                widget: "list"
+                min: 6
+                max: 6
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Value", name: "value", widget: "string" }
+              - { label: "Main image", name: "image_main", widget: "image" }
+              - { label: "Strip image 1", name: "image_strip_1", widget: "image" }
+              - { label: "Strip image 2", name: "image_strip_2", widget: "image" }
+
+          - label: "Destinations"
+            name: "destinations"
+            widget: "list"
+            min: 5
+            max: 5
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            min: 3
+            max: 3
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Origin", name: "origin", widget: "string" }
+              - { label: "Avatar", name: "avatar", widget: "image" }
+
+          - label: "Booking Section"
+            name: "booking"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Paragraph 1", name: "body_1", widget: "text" }
+              - { label: "Paragraph 2", name: "body_2", widget: "text" }
