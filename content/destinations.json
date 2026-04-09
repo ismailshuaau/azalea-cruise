@@ -1,0 +1,9 @@
+{
+  "destinations": [
+    { "name": "North Malé Atoll", "subtitle": "Gateway to Paradise", "image": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=85&auto=format" },
+    { "name": "Baa Atoll", "subtitle": "UNESCO Biosphere Reserve", "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=500&q=85&auto=format" },
+    { "name": "Ari Atoll", "subtitle": "Whale Shark Country", "image": "https://images.unsplash.com/photo-1544020452-0012011b76ae?w=500&q=85&auto=format" },
+    { "name": "Addu Atoll", "subtitle": "The Equatorial Jewel", "image": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=500&q=85&auto=format" },
+    { "name": "Lhaviyani Atoll", "subtitle": "Pristine Reefs & Beaches", "image": "https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=500&q=85&auto=format" }
+  ]
+}

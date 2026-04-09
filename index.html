@@ -1062,9 +1062,29 @@
       document.body.style.visibility = 'hidden';
       let c;
       try {
-        const res = await fetch('/content.json');
-        if (!res.ok) throw new Error('not found');
-        c = await res.json();
+        const load = (path) => fetch(path).then(r => { if (!r.ok) throw r; return r.json(); });
+        const [site, hero, statsData, about, expData, yacht, destData, testiData, booking] = await Promise.all([
+          load('/content/site.json'),
+          load('/content/hero.json'),
+          load('/content/stats.json'),
+          load('/content/about.json'),
+          load('/content/experiences.json'),
+          load('/content/yacht.json'),
+          load('/content/destinations.json'),
+          load('/content/testimonials.json'),
+          load('/content/booking.json'),
+        ]);
+        c = {
+          site,
+          hero,
+          stats:        statsData.stats,
+          about,
+          experiences:  expData.experiences,
+          yacht,
+          destinations: destData.destinations,
+          testimonials: testiData.testimonials,
+          booking,
+        };
       } catch (e) {
         document.body.style.visibility = 'visible';
         return;

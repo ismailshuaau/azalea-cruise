@@ -5,111 +5,314 @@ backend:
 media_folder: "images"
 public_folder: "/images"
 
+site_url: https://azaleamv.netlify.app
+display_url: https://azaleamv.netlify.app
+
+editor:
+  preview: false
+
 collections:
-  - name: "content"
-    label: "Site Content"
+
+  - name: "contact"
+    label: "Contact Details"
+    description: "Phone number, email and home port shown in the navbar, contact bar and footer."
     files:
-      - name: "all"
-        label: "All Content"
-        file: "content.json"
+      - name: "contact"
+        label: "Contact Details"
+        file: "content/site.json"
         fields:
-          - label: "Contact Info"
-            name: "site"
-            widget: "object"
-            fields:
-              - { label: "Phone (display)", name: "phone", widget: "string" }
-              - { label: "Phone (href, e.g. tel:+9607781881)", name: "phone_href", widget: "string" }
-              - { label: "Email", name: "email", widget: "string" }
-              - { label: "Home Port", name: "home_port", widget: "string" }
+          - label: "Phone Number"
+            name: "phone"
+            widget: "string"
+            hint: "Shown in the navbar and contact bar — e.g. +960 778 1881"
+            required: true
+          - label: "Phone Link"
+            name: "phone_href"
+            widget: "string"
+            hint: "Must start with tel: and have no spaces — e.g. tel:+9607781881"
+            required: true
+          - label: "Email Address"
+            name: "email"
+            widget: "string"
+            hint: "Shown in the contact bar and footer"
+            required: true
+          - label: "Home Port"
+            name: "home_port"
+            widget: "string"
+            hint: "Location shown in the contact bar — e.g. Malé, Maldives"
+            required: true
 
-          - label: "Hero Section"
-            name: "hero"
-            widget: "object"
-            fields:
-              - { label: "Eyebrow text", name: "eyebrow", widget: "string" }
-              - { label: "Heading (use <em>word</em> for italic gold)", name: "heading", widget: "string" }
-              - { label: "Tagline", name: "tagline", widget: "text" }
-              - { label: "Slide 1", name: "slide_1", widget: "image" }
-              - { label: "Slide 2", name: "slide_2", widget: "image" }
-              - { label: "Slide 3", name: "slide_3", widget: "image" }
-              - { label: "Slide 4", name: "slide_4", widget: "image" }
+  - name: "hero"
+    label: "Hero Banner"
+    description: "The full-screen slideshow and headline text visitors see first."
+    files:
+      - name: "hero"
+        label: "Hero Banner"
+        file: "content/hero.json"
+        fields:
+          - label: "Small Label (above heading)"
+            name: "eyebrow"
+            widget: "string"
+            hint: "Short gold text above the main title — e.g. Luxury Yacht Experience · Maldives"
+          - label: "Main Heading"
+            name: "heading"
+            widget: "string"
+            hint: "Wrap one word in <em>word</em> to show it in italic gold — e.g. Sail into the <em>Heart</em> of Paradise"
+            required: true
+          - label: "Tagline"
+            name: "tagline"
+            widget: "text"
+            hint: "One or two sentences shown below the heading"
+            required: true
+          - label: "Slideshow Image 1"
+            name: "slide_1"
+            widget: "image"
+            hint: "Landscape photo, at least 1920 × 1080 px"
+            required: true
+          - label: "Slideshow Image 2"
+            name: "slide_2"
+            widget: "image"
+            hint: "Landscape photo, at least 1920 × 1080 px"
+            required: true
+          - label: "Slideshow Image 3"
+            name: "slide_3"
+            widget: "image"
+            hint: "Landscape photo, at least 1920 × 1080 px"
+            required: true
+          - label: "Slideshow Image 4"
+            name: "slide_4"
+            widget: "image"
+            hint: "Landscape photo, at least 1920 × 1080 px"
+            required: true
 
-          - label: "Stats Bar"
+  - name: "stats"
+    label: "Stats Bar"
+    description: "The four highlight numbers shown in the dark bar beneath the hero image."
+    files:
+      - name: "stats"
+        label: "Stats Bar"
+        file: "content/stats.json"
+        fields:
+          - label: "Stats"
             name: "stats"
             widget: "list"
             min: 4
             max: 4
+            hint: "Exactly 4 stats — click one to edit it."
+            summary: "{{number}}  {{label}}"
             fields:
-              - { label: "Number", name: "number", widget: "string" }
-              - { label: "Label", name: "label", widget: "string" }
+              - label: "Number"
+                name: "number"
+                widget: "string"
+                hint: "e.g. 12+ or 98%"
+                required: true
+              - label: "Label"
+                name: "label"
+                widget: "string"
+                hint: "e.g. Years of Excellence"
+                required: true
 
-          - label: "About Section"
-            name: "about"
-            widget: "object"
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Paragraph 1", name: "body_1", widget: "text" }
-              - { label: "Paragraph 2", name: "body_2", widget: "text" }
-              - { label: "Main image", name: "image_main", widget: "image" }
-              - { label: "Accent image", name: "image_accent", widget: "image" }
+  - name: "about"
+    label: "About Section"
+    description: "The 'Our Story' section with two paragraphs and two photos."
+    files:
+      - name: "about"
+        label: "About Section"
+        file: "content/about.json"
+        fields:
+          - label: "Small Label (above heading)"
+            name: "eyebrow"
+            widget: "string"
+            hint: "e.g. Our Story"
+          - label: "Section Heading"
+            name: "heading"
+            widget: "string"
+            required: true
+          - label: "First Paragraph"
+            name: "body_1"
+            widget: "text"
+            required: true
+          - label: "Second Paragraph"
+            name: "body_2"
+            widget: "text"
+          - label: "Main Photo"
+            name: "image_main"
+            widget: "image"
+            hint: "Large photo on the left side — portrait or landscape"
+          - label: "Accent Photo"
+            name: "image_accent"
+            widget: "image"
+            hint: "Smaller overlapping photo — portrait works best"
 
-          - label: "Experiences"
+  - name: "experiences"
+    label: "Experiences"
+    description: "The six experience cards (Reef & Dive, Private Dining, etc.)."
+    files:
+      - name: "experiences"
+        label: "Experiences"
+        file: "content/experiences.json"
+        fields:
+          - label: "Experience Cards"
             name: "experiences"
             widget: "list"
             min: 6
             max: 6
+            hint: "Exactly 6 cards — click a card to edit it."
+            summary: "{{title}}"
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - { label: "Image", name: "image", widget: "image" }
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: true
+              - label: "Short Description"
+                name: "description"
+                widget: "text"
+                hint: "One or two sentences shown on the card"
+                required: true
+              - label: "Card Photo"
+                name: "image"
+                widget: "image"
+                hint: "Square or landscape photo — will be cropped to fill the card"
+                required: true
 
-          - label: "The Yacht"
-            name: "yacht"
-            widget: "object"
+  - name: "yacht"
+    label: "The Yacht"
+    description: "The 'The Azalea' section — text, specs table and gallery photos."
+    files:
+      - name: "yacht"
+        label: "The Yacht"
+        file: "content/yacht.json"
+        fields:
+          - label: "Small Label (above heading)"
+            name: "eyebrow"
+            widget: "string"
+            hint: "e.g. The Vessel"
+          - label: "Heading"
+            name: "heading"
+            widget: "string"
+            required: true
+          - label: "First Paragraph"
+            name: "body_1"
+            widget: "text"
+            required: true
+          - label: "Second Paragraph"
+            name: "body_2"
+            widget: "text"
+          - label: "Specifications"
+            name: "specs"
+            widget: "list"
+            min: 6
+            max: 6
+            hint: "Exactly 6 rows — click a row to edit it."
+            summary: "{{label}}: {{value}}"
             fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Paragraph 1", name: "body_1", widget: "text" }
-              - { label: "Paragraph 2", name: "body_2", widget: "text" }
-              - label: "Specs"
-                name: "specs"
-                widget: "list"
-                min: 6
-                max: 6
-                fields:
-                  - { label: "Label", name: "label", widget: "string" }
-                  - { label: "Value", name: "value", widget: "string" }
-              - { label: "Main image", name: "image_main", widget: "image" }
-              - { label: "Strip image 1", name: "image_strip_1", widget: "image" }
-              - { label: "Strip image 2", name: "image_strip_2", widget: "image" }
+              - label: "Label"
+                name: "label"
+                widget: "string"
+                hint: "e.g. Length"
+                required: true
+              - label: "Value"
+                name: "value"
+                widget: "string"
+                hint: "e.g. 28 metres"
+                required: true
+          - label: "Main Photo"
+            name: "image_main"
+            widget: "image"
+            hint: "Large yacht photo — landscape recommended"
+          - label: "Gallery Photo 1"
+            name: "image_strip_1"
+            widget: "image"
+            hint: "Smaller photo shown in the bottom-left of the gallery"
+          - label: "Gallery Photo 2"
+            name: "image_strip_2"
+            widget: "image"
+            hint: "Smaller photo shown in the bottom-right of the gallery"
 
-          - label: "Destinations"
+  - name: "destinations"
+    label: "Destinations"
+    description: "The five destination cards (North Malé Atoll, Baa Atoll, etc.)."
+    files:
+      - name: "destinations"
+        label: "Destinations"
+        file: "content/destinations.json"
+        fields:
+          - label: "Destination Cards"
             name: "destinations"
             widget: "list"
             min: 5
             max: 5
+            hint: "Exactly 5 destinations — click a card to edit it."
+            summary: "{{name}}"
             fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "string" }
-              - { label: "Image", name: "image", widget: "image" }
+              - label: "Destination Name"
+                name: "name"
+                widget: "string"
+                required: true
+              - label: "Subtitle"
+                name: "subtitle"
+                widget: "string"
+                hint: "Short tagline — e.g. UNESCO Biosphere Reserve"
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                hint: "Square or portrait photo works best"
+                required: true
 
-          - label: "Testimonials"
+  - name: "testimonials"
+    label: "Guest Reviews"
+    description: "Three guest testimonials shown in the reviews section."
+    files:
+      - name: "testimonials"
+        label: "Guest Reviews"
+        file: "content/testimonials.json"
+        fields:
+          - label: "Reviews"
             name: "testimonials"
             widget: "list"
             min: 3
             max: 3
+            hint: "Exactly 3 reviews — click a review to edit it."
+            summary: "{{name}} — {{origin}}"
             fields:
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Origin", name: "origin", widget: "string" }
-              - { label: "Avatar", name: "avatar", widget: "image" }
+              - label: "Review Text"
+                name: "quote"
+                widget: "text"
+                hint: "Do not add quotation marks — they are added automatically by the site."
+                required: true
+              - label: "Guest Name"
+                name: "name"
+                widget: "string"
+                required: true
+              - label: "Guest Location"
+                name: "origin"
+                widget: "string"
+                hint: "e.g. London, UK"
+              - label: "Guest Photo"
+                name: "avatar"
+                widget: "image"
+                hint: "Square headshot — will be cropped to a circle"
 
-          - label: "Booking Section"
-            name: "booking"
-            widget: "object"
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Paragraph 1", name: "body_1", widget: "text" }
-              - { label: "Paragraph 2", name: "body_2", widget: "text" }
+  - name: "booking"
+    label: "Booking Section"
+    description: "Text shown in the 'Begin Your Voyage' enquiry section."
+    files:
+      - name: "booking"
+        label: "Booking Section"
+        file: "content/booking.json"
+        fields:
+          - label: "Small Label (above heading)"
+            name: "eyebrow"
+            widget: "string"
+            hint: "e.g. Plan Your Escape"
+          - label: "Section Heading"
+            name: "heading"
+            widget: "string"
+            required: true
+          - label: "First Paragraph"
+            name: "body_1"
+            widget: "text"
+            required: true
+          - label: "Second Paragraph"
+            name: "body_2"
+            widget: "text"

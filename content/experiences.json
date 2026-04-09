@@ -1,0 +1,10 @@
+{
+  "experiences": [
+    { "title": "Reef & Dive", "description": "Explore vibrant coral gardens with expert guides in crystal-clear Maldivian waters.", "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800&q=85&auto=format" },
+    { "title": "Private Dining", "description": "Bespoke seafood menus prepared by our chef, served on secluded sandbars at sunset.", "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85&auto=format" },
+    { "title": "Dolphin Cruise", "description": "Sail at golden hour alongside spinner dolphins in their natural Maldivian habitat.", "image": "https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=800&q=85&auto=format" },
+    { "title": "Island Hopping", "description": "Chart a course through remote atolls, local fishing villages and pristine beaches.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=85&auto=format" },
+    { "title": "Deck Wellness", "description": "Sunrise yoga, in-cabin massages and wellness rituals designed for total rejuvenation.", "image": "https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg" },
+    { "title": "Stargazing at Sea", "description": "Far from city lights, experience some of the world's most breathtaking night skies.", "image": "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=800&q=85&auto=format" }
+  ]
+}
