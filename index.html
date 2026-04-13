@@ -1141,13 +1141,39 @@
       q('.about-img-main').src   = c.about.image_main;
       q('.about-img-accent').src = c.about.image_accent;
 
-      // Experiences
-      qq('.exp-card').forEach((card, i) => {
-        if (!c.experiences[i]) return;
-        card.querySelector('img').src              = c.experiences[i].image;
-        card.querySelector('img').alt              = c.experiences[i].title;
-        card.querySelector('h3').textContent       = c.experiences[i].title;
-        card.querySelector('.exp-desc').textContent = c.experiences[i].description;
+      // Experiences — rebuild cards dynamically to support any count
+      const expGrid = q('.exp-grid');
+      expGrid.innerHTML = '';
+      c.experiences.forEach((exp, i) => {
+        const delays = ['', ' reveal-delay-1', ' reveal-delay-2', ' reveal-delay-3', ' reveal-delay-4'];
+        const card   = document.createElement('div');
+        card.className = 'exp-card reveal' + (delays[i % delays.length] || '');
+
+        const img = document.createElement('img');
+        img.src = exp.image; img.alt = exp.title;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'exp-card-overlay';
+
+        const num = document.createElement('div');
+        num.className = 'exp-number';
+        num.textContent = String(i + 1).padStart(2, '0');
+
+        const h3 = document.createElement('h3');
+        h3.textContent = exp.title;
+
+        const desc = document.createElement('p');
+        desc.className = 'exp-desc';
+        desc.textContent = exp.description;
+
+        const lnk = document.createElement('span');
+        lnk.className = 'exp-link';
+        lnk.textContent = 'Learn more →';
+
+        overlay.append(num, h3, desc, lnk);
+        card.append(img, overlay);
+        expGrid.appendChild(card);
+        if (window.revealObserver) window.revealObserver.observe(card);
       });
 
       // Yacht
@@ -1868,18 +1894,18 @@
   <script>
     // ── Scroll reveal ──
     const revealEls = document.querySelectorAll('.reveal');
-    const observer  = new IntersectionObserver(
+    window.revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) {
             e.target.classList.add('visible');
-            observer.unobserve(e.target);
+            window.revealObserver.unobserve(e.target);
           }
         });
       },
       { threshold: 0.12 }
     );
-    revealEls.forEach(el => observer.observe(el));
+    revealEls.forEach(el => window.revealObserver.observe(el));
 
     // ── Hero slideshow ──
     let _slideTimer;

@@ -155,9 +155,7 @@ collections:
           - label: "Experience Cards"
             name: "experiences"
             widget: "list"
-            min: 6
-            max: 6
-            hint: "Exactly 6 cards — click a card to edit it."
+            hint: "Click a card to edit it, or use the Add button to create a new one."
             summary: "{{title}}"
             fields:
               - label: "Title"
