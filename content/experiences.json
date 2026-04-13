@@ -6,7 +6,7 @@
       "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800&q=85&auto=format"
     },
     {
-      "title": "2. Watersports",
+      "title": "Watersports",
       "description": "Have some fun on the water with activities like jet skiing, paddleboarding, and kayaking.",
       "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85&auto=format"
     },
@@ -26,9 +26,19 @@
       "image": "https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg"
     },
     {
+      "title": "Snorkeling Trip",
+      "description": "Snorkel through clear waters and discover colorful reefs and marine life up close.",
+      "image": "https://static.wixstatic.com/media/00c9d0_8c7c36cefdd743dba55a9e6931d50992.jpg/v1/fill/w_1500,h_531,al_c,q_85,enc_avif,quality_auto/00c9d0_8c7c36cefdd743dba55a9e6931d50992.jpg"
+    },
+    {
       "title": "Resort Day Trip",
       "description": "Spend the day at a luxury island resort, enjoying great food, spa treatments, and beautiful surroundings.",
-      "image": "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=800&q=85&auto=format"
+      "image": "https://static.wixstatic.com/media/00c9d0_2accb1fe122341bc8e9aab31e8922b9b.jpg/v1/fill/w_3000,h_1073,al_c,q_90,enc_avif,quality_auto/00c9d0_2accb1fe122341bc8e9aab31e8922b9b.jpg"
+    },
+    {
+      "title": "Water Golf",
+      "description": "Try something different with a fun round of golf at sea, hitting eco-friendly balls into the ocean.",
+      "image": "https://static.wixstatic.com/media/00c9d0_6c0d85ab527048c79704f7d43a87118c~mv2.jpg/v1/fill/w_1280,h_456,al_c,q_85,enc_avif,quality_auto/photo_2023-04-03_21-12-01_edited.jpg"
     }
   ]
 }
