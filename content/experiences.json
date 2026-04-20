@@ -1,10 +1,44 @@
 {
   "experiences": [
-    { "title": "Reef & Dive", "description": "Explore vibrant coral gardens with expert guides in crystal-clear Maldivian waters.", "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800&q=85&auto=format" },
-    { "title": "Private Dining", "description": "Bespoke seafood menus prepared by our chef, served on secluded sandbars at sunset.", "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85&auto=format" },
-    { "title": "Dolphin Cruise", "description": "Sail at golden hour alongside spinner dolphins in their natural Maldivian habitat.", "image": "https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=800&q=85&auto=format" },
-    { "title": "Island Hopping", "description": "Chart a course through remote atolls, local fishing villages and pristine beaches.", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=85&auto=format" },
-    { "title": "Deck Wellness", "description": "Sunrise yoga, in-cabin massages and wellness rituals designed for total rejuvenation.", "image": "https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg" },
-    { "title": "Stargazing at Sea", "description": "Far from city lights, experience some of the world's most breathtaking night skies.", "image": "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=800&q=85&auto=format" }
+    {
+      "title": "Scuba Diving",
+      "description": "Explore vibrant coral gardens with expert guides in crystal-clear Maldivian waters.",
+      "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Watersports",
+      "description": "From jet skiing to kayaking and paddleboarding, enjoy a full range of thrilling water activities in the warm Indian Ocean.",
+      "image": "https://images.unsplash.com/photo-1530870110042-98b2cb110834?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Fishing",
+      "description": "Join our crew for traditional Maldivian fishing excursions — from sunset handline fishing to exciting big-game deep-sea adventures.",
+      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Manta, Dolphin & Whaleshark Cruise",
+      "description": "Sail alongside the ocean's most magnificent creatures — mantas, spinner dolphins and whale sharks — in the Maldives' protected marine zones.",
+      "image": "https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Sand Bank Trip",
+      "description": "Step ashore on a pristine uninhabited sandbank — a stretch of pure white sand surrounded by nothing but turquoise ocean and open sky.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Snorkeling Trip",
+      "description": "Glide through warm, crystal-clear waters above vibrant coral reefs teeming with tropical fish and Maldivian marine life.",
+      "image": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Water Golf",
+      "description": "Tee off in the heart of the Indian Ocean with Eco Water Golf — launching floating balls into the endless blue from the deck of Azalea. A playful, one-of-a-kind activity perfect for relaxed afternoons or lighthearted group competitions on your Maldives yacht charter.",
+      "image": "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=800&q=85&auto=format"
+    },
+    {
+      "title": "Resort Day Trip",
+      "description": "Step off Azalea and spend the day at one of the Maldives' most iconic 5-star resorts — enjoying fine dining, spa treatments and world-class facilities. A perfect blend of private yacht freedom and resort indulgence.",
+      "image": "https://images.unsplash.com/photo-1540541338537-1e77e5d5b1e7?w=800&q=85&auto=format"
+    }
   ]
 }
