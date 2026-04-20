@@ -227,6 +227,17 @@ collections:
             widget: "image"
             hint: "Smaller photo shown in the bottom-right of the gallery"
 
+          - label: "Cinematic Tour Gallery"
+            name: "gallery"
+            widget: "list"
+            hint: "Photos shown in the 'Begin Tour' cinematic experience. Click a row to edit, drag to reorder."
+            summary: "{{room}} — {{caption}}"
+            fields:
+              - { label: "Photo", name: "image", widget: "image", required: true, hint: "High-res landscape photo, at least 1920 × 1080 px" }
+              - { label: "Room Name", name: "room", widget: "string", required: true, hint: "Main title shown on screen — e.g. Master Suite" }
+              - { label: "Caption", name: "caption", widget: "string", hint: "Short line below room name — e.g. Private deck access · Ocean view" }
+              - { label: "Category", name: "category", widget: "select", options: ["Exterior", "Cabins", "Dining", "Deck", "Bathrooms"], hint: "Groups photos in the Rooms side menu" }
+
   - name: "destinations"
     label: "Destinations"
     description: "The five destination cards (North Malé Atoll, Baa Atoll, etc.)."

@@ -1109,6 +1109,307 @@
       .form-row { grid-template-columns: 1fr; }
       .booking-form { padding: 2rem; }
     }
+
+    /* ── Cinematic Tour ── */
+
+    /* Invitation card */
+    .tour-invite {
+      margin-top: 5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .tour-invite-card {
+      border: 1px solid rgba(201,164,104,0.25);
+      padding: 3rem 4rem;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
+      max-width: 380px;
+      width: 100%;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .tour-invite-card:hover {
+      border-color: rgba(201,164,104,0.5);
+      background: rgba(255,255,255,0.04);
+    }
+    .tour-invite-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .tour-invite-name {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .tour-invite-rule {
+      width: 2rem; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.8rem;
+    }
+
+    /* Overlay */
+    .tour-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #050c14;
+      visibility: hidden;
+      clip-path: circle(0% at var(--iris-x, 50%) var(--iris-y, 70%));
+      transition: clip-path 0.85s cubic-bezier(0.77,0,0.175,1),
+                  visibility 0s 0.85s;
+    }
+    .tour-overlay.open {
+      visibility: visible;
+      clip-path: circle(150% at var(--iris-x, 50%) var(--iris-y, 70%));
+      transition: clip-path 0.85s cubic-bezier(0.77,0,0.175,1),
+                  visibility 0s 0s;
+    }
+
+    /* Photos */
+    .tour-photos {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .tour-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.6s ease;
+    }
+    .tour-slide.active {
+      opacity: 1;
+      animation: tourKenBurns 9s ease-out forwards;
+    }
+    @keyframes tourKenBurns {
+      from { transform: scale(1.0); }
+      to   { transform: scale(1.09); }
+    }
+
+    /* Dark gradient to keep UI readable */
+    .tour-photos::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top,  rgba(5,12,20,0.85) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(5,12,20,0.5) 0%, transparent 25%);
+      pointer-events: none;
+    }
+
+    /* Top controls */
+    .tour-controls-top {
+      position: absolute;
+      top: 2rem; left: 2rem; right: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    .tour-btn {
+      background: rgba(5,12,20,0.55);
+      border: 1px solid rgba(201,164,104,0.2);
+      color: rgba(255,255,255,0.75);
+      padding: 0.55rem 1.1rem;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tour-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(5,12,20,0.8);
+    }
+    .tour-btn-close {
+      font-size: 1.2rem;
+      letter-spacing: 0;
+      padding: 0.45rem 0.85rem;
+    }
+
+    /* Click-half nav areas */
+    .tour-nav-half {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 40%;
+      z-index: 5;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .tour-nav-half-prev { left: 0; justify-content: flex-start; padding-left: 2rem; }
+    .tour-nav-half-next { right: 0; justify-content: flex-end; padding-right: 2rem; }
+    .tour-nav-arrow {
+      width: 48px; height: 48px;
+      border: 1px solid rgba(201,164,104,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.0);
+      font-size: 1.1rem;
+      transition: var(--transition);
+      background: rgba(5,12,20,0.0);
+      backdrop-filter: blur(0px);
+    }
+    .tour-nav-half:hover .tour-nav-arrow {
+      color: var(--gold);
+      background: rgba(5,12,20,0.6);
+      border-color: var(--gold);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Text overlay */
+    .tour-text-wrap {
+      position: absolute;
+      bottom: 5.5rem;
+      left: 2.5rem;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .tour-counter-el {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0; transform: translateY(8px);
+    }
+    .tour-room-el {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.15;
+      margin-top: 0.4rem;
+      opacity: 0; transform: translateY(8px);
+    }
+    .tour-caption-el {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+      margin-top: 0.5rem;
+      opacity: 0; transform: translateY(8px);
+    }
+    .tour-text-wrap.text-in .tour-counter-el {
+      animation: tourTxtIn 0.6s 0.35s forwards;
+    }
+    .tour-text-wrap.text-in .tour-room-el {
+      animation: tourTxtIn 0.6s 0.6s forwards;
+    }
+    .tour-text-wrap.text-in .tour-caption-el {
+      animation: tourTxtIn 0.6s 0.85s forwards;
+    }
+    @keyframes tourTxtIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Dot timeline */
+    .tour-dots {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      right: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+    .tour-dot {
+      flex: 1;
+      max-width: 44px;
+      height: 2px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      transition: background 0.4s ease, max-width 0.4s ease, height 0.3s ease;
+      padding: 0;
+    }
+    .tour-dot.active {
+      background: var(--gold);
+      max-width: 64px;
+      height: 3px;
+    }
+    .tour-dot:hover:not(.active) {
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* Rooms panel */
+    .tour-rooms-panel {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 260px;
+      background: rgba(5,12,20,0.92);
+      border-left: 1px solid rgba(201,164,104,0.15);
+      backdrop-filter: blur(20px);
+      z-index: 15;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 2rem 2rem;
+    }
+    .tour-rooms-panel.open { transform: translateX(0); }
+    .tour-rooms-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+    .tour-rooms-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .tour-room-item {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: color var(--transition), padding-left var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .tour-room-item::before {
+      content: '○';
+      font-style: normal;
+      font-size: 0.6rem;
+      color: rgba(201,164,104,0.3);
+      flex-shrink: 0;
+      transition: color var(--transition);
+    }
+    .tour-room-item:hover,
+    .tour-room-item.active {
+      color: var(--white);
+      padding-left: 0.4rem;
+    }
+    .tour-room-item.active::before { content: '●'; color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .tour-rooms-panel { width: 100%; }
+      .tour-text-wrap { left: 1.5rem; bottom: 5rem; }
+      .tour-dots { left: 1.5rem; right: 1.5rem; bottom: 2rem; }
+      .tour-controls-top { top: 1.2rem; left: 1.2rem; right: 1.2rem; }
+      .tour-invite-card { padding: 2.5rem 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -1273,6 +1574,11 @@
 
       // Re-init slideshow with new slides/dots
       if (window.initSlideshow) window.initSlideshow();
+
+      // Cinematic tour gallery
+      if (c.yacht.gallery && c.yacht.gallery.length && window.buildTour) {
+        window.buildTour(c.yacht.gallery);
+      }
     }
   </script>
 
@@ -1580,6 +1886,17 @@
           </div>
         </div>
       </div>
+
+      <!-- Tour invitation card -->
+      <div class="tour-invite reveal">
+        <div class="tour-invite-card">
+          <p class="tour-invite-eyebrow">Private Tour</p>
+          <h3 class="tour-invite-name">The Azalea</h3>
+          <div class="tour-invite-rule"></div>
+          <button class="btn btn-gold" onclick="openTour(this)">Begin Tour &nbsp;→</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2039,6 +2356,150 @@
       });
     })();
 
+    // ── Cinematic Tour ──
+    (function () {
+      const overlay    = document.getElementById('tourOverlay');
+      const photosWrap = document.getElementById('tourPhotos');
+      const dotsWrap   = document.getElementById('tourDots');
+      const roomsList  = document.getElementById('tourRoomsList');
+      const roomsPanel = document.getElementById('tourRoomsPanel');
+      const counterEl  = document.getElementById('tourCounter');
+      const roomEl     = document.getElementById('tourRoomEl');
+      const captionEl  = document.getElementById('tourCaptionEl');
+      const textWrap   = document.getElementById('tourTextWrap');
+
+      let gallery  = [];
+      let current  = 0;
+      let autoTimer;
+
+      /* ── Build tour from data ── */
+      window.buildTour = function (data) {
+        gallery = data;
+
+        // Photo slides
+        photosWrap.innerHTML = '';
+        gallery.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'tour-slide';
+          div.style.backgroundImage = `url('${item.image}')`;
+          photosWrap.appendChild(div);
+        });
+
+        // Dots
+        dotsWrap.innerHTML = '';
+        gallery.forEach((_, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'tour-dot';
+          btn.setAttribute('aria-label', `Photo ${i + 1}`);
+          btn.addEventListener('click', e => { e.stopPropagation(); tourGo(i); });
+          dotsWrap.appendChild(btn);
+        });
+
+        // Rooms chapter menu (unique room names)
+        roomsList.innerHTML = '';
+        const seen = new Set();
+        gallery.forEach((item, i) => {
+          if (seen.has(item.room)) return;
+          seen.add(item.room);
+          const li = document.createElement('li');
+          li.className = 'tour-room-item';
+          li.textContent = item.room;
+          li.dataset.index = i;
+          li.addEventListener('click', () => { tourGo(parseInt(li.dataset.index)); closeRooms(); });
+          roomsList.appendChild(li);
+        });
+      };
+
+      /* ── Navigate ── */
+      function tourGo(index) {
+        const slides = photosWrap.querySelectorAll('.tour-slide');
+        if (!slides.length) return;
+
+        slides[current].classList.remove('active');
+        current = ((index % gallery.length) + gallery.length) % gallery.length;
+
+        // Restart Ken Burns
+        const next = slides[current];
+        next.style.animation = 'none';
+        next.offsetHeight; // reflow
+        next.style.animation = '';
+        next.classList.add('active');
+
+        updateUI();
+        resetAuto();
+      }
+
+      function updateUI() {
+        const item = gallery[current];
+        if (!item) return;
+
+        counterEl.textContent = `${String(current + 1).padStart(2,'0')} / ${String(gallery.length).padStart(2,'0')}`;
+        roomEl.textContent    = item.room;
+        captionEl.textContent = item.caption;
+
+        // Restart text stagger
+        textWrap.classList.remove('text-in');
+        textWrap.offsetHeight;
+        textWrap.classList.add('text-in');
+
+        // Dots
+        dotsWrap.querySelectorAll('.tour-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+
+        // Rooms list active
+        roomsList.querySelectorAll('.tour-room-item').forEach(li => li.classList.toggle('active', li.textContent === item.room));
+      }
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => tourGo(current + 1), 7500);
+      }
+
+      /* ── Open / Close ── */
+      window.openTour = function (btn) {
+        if (!gallery.length) return;
+        const rect = btn.getBoundingClientRect();
+        const x = ((rect.left + rect.width  / 2) / window.innerWidth  * 100).toFixed(1);
+        const y = ((rect.top  + rect.height / 2) / window.innerHeight * 100).toFixed(1);
+        overlay.style.setProperty('--iris-x', x + '%');
+        overlay.style.setProperty('--iris-y', y + '%');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        tourGo(0);
+      };
+
+      function closeTour() {
+        clearInterval(autoTimer);
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function openRooms()  { roomsPanel.classList.add('open'); }
+      function closeRooms() { roomsPanel.classList.remove('open'); }
+
+      /* ── Event listeners ── */
+      document.getElementById('tourClose').addEventListener('click',   e => { e.stopPropagation(); closeTour(); });
+      document.getElementById('tourMenuBtn').addEventListener('click', e => { e.stopPropagation(); roomsPanel.classList.toggle('open'); });
+      document.getElementById('tourPrev').addEventListener('click',    e => { e.stopPropagation(); tourGo(current - 1); });
+      document.getElementById('tourNext').addEventListener('click',    e => { e.stopPropagation(); tourGo(current + 1); });
+
+      // Keyboard
+      document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'ArrowRight') tourGo(current + 1);
+        if (e.key === 'ArrowLeft')  tourGo(current - 1);
+        if (e.key === 'Escape')     closeTour();
+      });
+
+      // Touch swipe
+      let _tx = 0;
+      overlay.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
+      overlay.addEventListener('touchend',   e => {
+        const dx = e.changedTouches[0].clientX - _tx;
+        if (Math.abs(dx) > 50) tourGo(dx < 0 ? current + 1 : current - 1);
+      });
+
+    })();
+
     // ── Form submit ──
     function handleSubmit(e) {
       e.preventDefault();
@@ -2049,6 +2510,48 @@
       btn.disabled = true;
     }
   </script>
+
+  <!-- ═══════════════════════════════════════
+       CINEMATIC TOUR OVERLAY
+  ═══════════════════════════════════════ -->
+  <div class="tour-overlay" id="tourOverlay" role="dialog" aria-modal="true" aria-label="Yacht tour">
+
+    <!-- Photos -->
+    <div class="tour-photos" id="tourPhotos"></div>
+
+    <!-- Top bar -->
+    <div class="tour-controls-top">
+      <button class="tour-btn tour-btn-close" id="tourClose" aria-label="Close tour">&#215; Close</button>
+      <div style="display:flex;gap:0.6rem;">
+        <button class="tour-btn" id="tourMenuBtn" aria-label="Room chapters">&#9776;&nbsp; Rooms</button>
+      </div>
+    </div>
+
+    <!-- Click-half navigation -->
+    <div class="tour-nav-half tour-nav-half-prev" id="tourPrev" aria-label="Previous photo">
+      <div class="tour-nav-arrow">&#8592;</div>
+    </div>
+    <div class="tour-nav-half tour-nav-half-next" id="tourNext" aria-label="Next photo">
+      <div class="tour-nav-arrow">&#8594;</div>
+    </div>
+
+    <!-- Text overlay -->
+    <div class="tour-text-wrap" id="tourTextWrap">
+      <div class="tour-counter-el" id="tourCounter"></div>
+      <div class="tour-room-el"    id="tourRoomEl"></div>
+      <div class="tour-caption-el" id="tourCaptionEl"></div>
+    </div>
+
+    <!-- Dot timeline -->
+    <div class="tour-dots" id="tourDots"></div>
+
+    <!-- Rooms panel -->
+    <div class="tour-rooms-panel" id="tourRoomsPanel">
+      <p class="tour-rooms-label">Rooms</p>
+      <ul class="tour-rooms-list" id="tourRoomsList"></ul>
+    </div>
+
+  </div>
 
   <!-- Netlify Identity — processes invite/magic link tokens on the main domain -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

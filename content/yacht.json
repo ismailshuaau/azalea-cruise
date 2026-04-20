@@ -4,32 +4,46 @@
   "body_1": "A masterpiece of naval craftsmanship, Azalea was purpose-built for the Maldivian archipelago. Her shallow draft allows access to the most secluded lagoons, while her spacious decks and refined interiors ensure your comfort never wavers.",
   "body_2": "Accommodating up to eight guests in four elegantly appointed cabins, every inch of Azalea reflects our commitment to providing an unparalleled experience at sea.",
   "specs": [
-    {
-      "label": "Length",
-      "value": "41 metres"
-    },
-    {
-      "label": "Capacity",
-      "value": "Up to 18 guests"
-    },
-    {
-      "label": "Cabins",
-      "value": "9 en-suite cabins"
-    },
-    {
-      "label": "Crew",
-      "value": "Expert crew of 13"
-    },
-    {
-      "label": "Range",
-      "value": "All Maldivian atolls"
-    },
-    {
-      "label": "Season",
-      "value": "Year-round"
-    }
+    { "label": "Length",   "value": "41 metres" },
+    { "label": "Capacity", "value": "Up to 18 guests" },
+    { "label": "Cabins",   "value": "9 en-suite cabins" },
+    { "label": "Crew",     "value": "Expert crew of 13" },
+    { "label": "Range",    "value": "All Maldivian atolls" },
+    { "label": "Season",   "value": "Year-round" }
   ],
-  "image_main": "https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg",
+  "image_main":    "https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg",
   "image_strip_1": "https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg",
-  "image_strip_2": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80&auto=format"
+  "image_strip_2": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80&auto=format",
+  "gallery": [
+    {
+      "image": "https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg",
+      "room": "The Azalea",
+      "caption": "41 metres · Built for the Maldivian archipelago",
+      "category": "Exterior"
+    },
+    {
+      "image": "https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg",
+      "room": "Evening on Deck",
+      "caption": "Where the ocean meets the night sky",
+      "category": "Deck"
+    },
+    {
+      "image": "https://static.wixstatic.com/media/00c9d0_8bc0d55e004a4648b15be729c22389af~mv2.png",
+      "room": "Island Views",
+      "caption": "Pristine Maldivian waters at every turn",
+      "category": "Exterior"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85&auto=format",
+      "room": "Dining Room",
+      "caption": "Bespoke menus · Seats up to 18 guests",
+      "category": "Dining"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85&auto=format",
+      "room": "Sun Deck",
+      "caption": "360° ocean views · Open-air lounge",
+      "category": "Deck"
+    }
+  ]
 }
