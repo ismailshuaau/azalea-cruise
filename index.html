@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Azalea Cruise — Luxury Yacht Maldives</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚓</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -2266,6 +2267,48 @@
   </footer>
 
   <!-- ═══════════════════════════════════════
+       CINEMATIC TOUR OVERLAY
+  ═══════════════════════════════════════ -->
+  <div class="tour-overlay" id="tourOverlay" role="dialog" aria-modal="true" aria-label="Yacht tour">
+
+    <!-- Photos -->
+    <div class="tour-photos" id="tourPhotos"></div>
+
+    <!-- Top bar -->
+    <div class="tour-controls-top">
+      <button class="tour-btn tour-btn-close" id="tourClose" aria-label="Close tour">&#215; Close</button>
+      <div style="display:flex;gap:0.6rem;">
+        <button class="tour-btn" id="tourMenuBtn" aria-label="Room chapters">&#9776;&nbsp; Rooms</button>
+      </div>
+    </div>
+
+    <!-- Click-half navigation -->
+    <div class="tour-nav-half tour-nav-half-prev" id="tourPrev" aria-label="Previous photo">
+      <div class="tour-nav-arrow">&#8592;</div>
+    </div>
+    <div class="tour-nav-half tour-nav-half-next" id="tourNext" aria-label="Next photo">
+      <div class="tour-nav-arrow">&#8594;</div>
+    </div>
+
+    <!-- Text overlay -->
+    <div class="tour-text-wrap" id="tourTextWrap">
+      <div class="tour-counter-el" id="tourCounter"></div>
+      <div class="tour-room-el"    id="tourRoomEl"></div>
+      <div class="tour-caption-el" id="tourCaptionEl"></div>
+    </div>
+
+    <!-- Dot timeline -->
+    <div class="tour-dots" id="tourDots"></div>
+
+    <!-- Rooms panel -->
+    <div class="tour-rooms-panel" id="tourRoomsPanel">
+      <p class="tour-rooms-label">Rooms</p>
+      <ul class="tour-rooms-list" id="tourRoomsList"></ul>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
        SCRIPTS
   ═══════════════════════════════════════ -->
   <script>
@@ -2510,48 +2553,6 @@
       btn.disabled = true;
     }
   </script>
-
-  <!-- ═══════════════════════════════════════
-       CINEMATIC TOUR OVERLAY
-  ═══════════════════════════════════════ -->
-  <div class="tour-overlay" id="tourOverlay" role="dialog" aria-modal="true" aria-label="Yacht tour">
-
-    <!-- Photos -->
-    <div class="tour-photos" id="tourPhotos"></div>
-
-    <!-- Top bar -->
-    <div class="tour-controls-top">
-      <button class="tour-btn tour-btn-close" id="tourClose" aria-label="Close tour">&#215; Close</button>
-      <div style="display:flex;gap:0.6rem;">
-        <button class="tour-btn" id="tourMenuBtn" aria-label="Room chapters">&#9776;&nbsp; Rooms</button>
-      </div>
-    </div>
-
-    <!-- Click-half navigation -->
-    <div class="tour-nav-half tour-nav-half-prev" id="tourPrev" aria-label="Previous photo">
-      <div class="tour-nav-arrow">&#8592;</div>
-    </div>
-    <div class="tour-nav-half tour-nav-half-next" id="tourNext" aria-label="Next photo">
-      <div class="tour-nav-arrow">&#8594;</div>
-    </div>
-
-    <!-- Text overlay -->
-    <div class="tour-text-wrap" id="tourTextWrap">
-      <div class="tour-counter-el" id="tourCounter"></div>
-      <div class="tour-room-el"    id="tourRoomEl"></div>
-      <div class="tour-caption-el" id="tourCaptionEl"></div>
-    </div>
-
-    <!-- Dot timeline -->
-    <div class="tour-dots" id="tourDots"></div>
-
-    <!-- Rooms panel -->
-    <div class="tour-rooms-panel" id="tourRoomsPanel">
-      <p class="tour-rooms-label">Rooms</p>
-      <ul class="tour-rooms-list" id="tourRoomsList"></ul>
-    </div>
-
-  </div>
 
   <!-- Netlify Identity — processes invite/magic link tokens on the main domain -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
