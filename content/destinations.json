@@ -1,9 +1,29 @@
 {
   "destinations": [
-    { "name": "North Malé Atoll", "subtitle": "Gateway to Paradise", "image": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=85&auto=format" },
-    { "name": "Baa Atoll", "subtitle": "UNESCO Biosphere Reserve", "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=500&q=85&auto=format" },
-    { "name": "Ari Atoll", "subtitle": "Whale Shark Country", "image": "https://images.unsplash.com/photo-1544020452-0012011b76ae?w=500&q=85&auto=format" },
-    { "name": "Addu Atoll", "subtitle": "The Equatorial Jewel", "image": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=500&q=85&auto=format" },
-    { "name": "Lhaviyani Atoll", "subtitle": "Pristine Reefs & Beaches", "image": "https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=500&q=85&auto=format" }
+    {
+      "name": "Malé Atoll",
+      "subtitle": "Gateway to Paradise",
+      "image": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=85&auto=format"
+    },
+    {
+      "name": "South Malé Atoll",
+      "subtitle": "Calm lagoons and world-class surf breaks",
+      "image": "https://media.istockphoto.com/id/152127945/photo/maldives.jpg?s=1024x1024&w=is&k=20&c=4HLaqBw3omZlVM2OFTI42Q03jh40L2G75JY7XY6IcSM="
+    },
+    {
+      "name": "Baa Atoll",
+      "subtitle": "UNESCO Biosphere Reserve",
+      "image": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=500&q=85&auto=format"
+    },
+    {
+      "name": "Vaavu Atoll",
+      "subtitle": "Remote waters with thrilling shark encounters",
+      "image": "https://media.istockphoto.com/id/178961943/photo/blue-or-black-analed-carangue.jpg?s=1024x1024&w=is&k=20&c=06SPL4R5xfh-Qnche-HoOgGWDA6M-tmCNKInBE2utz8="
+    },
+    {
+      "name": "Ari Atoll",
+      "subtitle": "Whale Shark Country",
+      "image": "https://media.istockphoto.com/id/1064711088/photo/maldives-south-ari-atoll-islands.jpg?s=1024x1024&w=is&k=20&c=-6sJd7B_titK4z44DbofswEQPcbu8DX0GWAkR2bdvyU="
+    }
   ]
 }
