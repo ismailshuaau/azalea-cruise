@@ -286,7 +286,7 @@ collections:
 
   - name: "testimonials"
     label: "Guest Reviews"
-    description: "Three guest testimonials shown in the reviews section."
+    description: "Three guest reviews shown on the site. Source your reviews from Tripadvisor — copy the review text, guest name and date."
     files:
       - name: "testimonials"
         label: "Guest Reviews"
@@ -297,26 +297,27 @@ collections:
             widget: "list"
             min: 3
             max: 3
-            hint: "Exactly 3 reviews — click a review to edit it."
+            hint: "Exactly 3 reviews. Tip — copy from Tripadvisor: azaleacruise.com/admin/#tripadvisor"
             summary: "{{name}} — {{origin}}"
             fields:
               - label: "Review Text"
                 name: "quote"
                 widget: "text"
-                hint: "Do not add quotation marks — they are added automatically by the site."
+                hint: "Paste the review text from Tripadvisor. Do not add quotation marks — they are added automatically."
                 required: true
               - label: "Guest Name"
                 name: "name"
                 widget: "string"
+                hint: "As shown on Tripadvisor — e.g. Lilian L."
                 required: true
-              - label: "Guest Location"
+              - label: "Guest Location / Date"
                 name: "origin"
                 widget: "string"
-                hint: "e.g. London, UK"
+                hint: "Location or date from Tripadvisor — e.g. Perth, Australia or July 2024"
               - label: "Guest Photo"
                 name: "avatar"
-                widget: "image"
-                hint: "Square headshot — will be cropped to a circle"
+                widget: "string"
+                hint: "Leave as-is to use initials avatar. Or paste a direct image URL. Format: https://ui-avatars.com/api/?name=First+Last&background=09131F&color=C9A468&bold=true&size=100"
 
   - name: "booking"
     label: "Booking Section"

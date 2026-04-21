@@ -1121,6 +1121,63 @@
       margin-top: 0.2rem;
     }
 
+    /* TripAdvisor attribution on each card */
+    .testi-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1.4rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .testi-source-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #34E0A1;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .testi-source a { color: #34E0A1; opacity: 0.75; text-decoration: none; }
+    .testi-source a:hover { opacity: 1; }
+
+    /* TripAdvisor trust strip */
+    .ta-trust {
+      margin-top: 5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-align: center;
+    }
+    .ta-trust-stars {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: #34E0A1;
+    }
+    .ta-trust-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.4);
+    }
+    .ta-trust-label strong { color: rgba(255,255,255,0.75); }
+    .ta-trust-label .ta-green { color: #34E0A1; }
+    .ta-trust-link {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201,164,104,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.3s ease;
+    }
+    .ta-trust-link:hover { border-color: var(--gold); }
+
     /* ── Booking ── */
     #booking {
       background: linear-gradient(135deg, var(--ocean) 0%, var(--navy) 60%),
@@ -2099,10 +2156,16 @@
       // Testimonials
       qq('.testi-card').forEach((card, i) => {
         if (!c.testimonials[i]) return;
-        card.querySelector('.testi-text').textContent   = `"${c.testimonials[i].quote}"`;
-        card.querySelector('.testi-avatar').src         = c.testimonials[i].avatar;
-        card.querySelector('.testi-name').textContent   = c.testimonials[i].name;
-        card.querySelector('.testi-origin').textContent = c.testimonials[i].origin;
+        const t = c.testimonials[i];
+        card.querySelector('.testi-text').textContent   = `"${t.quote}"`;
+        card.querySelector('.testi-avatar').src         = t.avatar;
+        card.querySelector('.testi-name').textContent   = t.name;
+        card.querySelector('.testi-origin').textContent = t.origin;
+        // TripAdvisor source attribution
+        const srcEl = card.querySelector('.testi-source');
+        if (srcEl && t.source_url) {
+          srcEl.querySelector('a').href = t.source_url;
+        }
       });
 
       // Booking
@@ -2636,22 +2699,15 @@
             <div class="star"></div><div class="star"></div><div class="star"></div>
             <div class="star"></div><div class="star"></div>
           </div>
-          <p class="testi-text">
-            "Seven days aboard Azalea was the most extraordinary travel experience of my life.
-            The crew's knowledge of the Maldives is unparalleled — every dive site,
-            every sandbar felt like a secret only they knew."
-          </p>
+          <p class="testi-text">"Can't recommend this yacht enough — definitely better than staying in one resort. From the moment they picked us up from the airport you feel like a celebrity. The food is the best I've ever had on any boat. The only bad part is to leave."</p>
           <div class="testi-author">
-            <img
-              class="testi-avatar"
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
-              alt="Sarah M."
-            />
+            <img class="testi-avatar" src="https://ui-avatars.com/api/?name=Lilian+L&background=09131F&color=C9A468&bold=true&size=100" alt="Lilian L." />
             <div>
-              <div class="testi-name">Sarah Mitchell</div>
-              <div class="testi-origin">London, UK</div>
+              <div class="testi-name">Lilian L.</div>
+              <div class="testi-origin">Perth, Australia</div>
             </div>
           </div>
+          <div class="testi-source"><span class="testi-source-dot"></span> via <a href="https://www.tripadvisor.com/Attraction_Review-g298571-d11912662-Reviews-Azalea_Cruise-Male.html" target="_blank" rel="noopener">Tripadvisor</a></div>
         </div>
 
         <div class="testi-card reveal reveal-delay-1">
@@ -2659,22 +2715,15 @@
             <div class="star"></div><div class="star"></div><div class="star"></div>
             <div class="star"></div><div class="star"></div>
           </div>
-          <p class="testi-text">
-            "The private sandbar dinner was like something out of a dream. Our chef prepared
-            fresh lobster as the sun melted into the Indian Ocean. Azalea turns
-            the Maldives into pure magic."
-          </p>
+          <p class="testi-text">"Azalea and the whole crew are just awesome! Great people, great food, great sports — wake boarding, jet skis, scuba diving, surfing. The scenery cruising the Maldives is the most beautiful my family and I have ever seen. A magical experience that will last forever."</p>
           <div class="testi-author">
-            <img
-              class="testi-avatar"
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80"
-              alt="James K."
-            />
+            <img class="testi-avatar" src="https://ui-avatars.com/api/?name=Fabio+D&background=09131F&color=C9A468&bold=true&size=100" alt="Fabio D." />
             <div>
-              <div class="testi-name">James &amp; Priya Kumar</div>
-              <div class="testi-origin">Singapore</div>
+              <div class="testi-name">Fabio D.</div>
+              <div class="testi-origin">July 2024</div>
             </div>
           </div>
+          <div class="testi-source"><span class="testi-source-dot"></span> via <a href="https://www.tripadvisor.com/Attraction_Review-g298571-d11912662-Reviews-Azalea_Cruise-Male.html" target="_blank" rel="noopener">Tripadvisor</a></div>
         </div>
 
         <div class="testi-card reveal reveal-delay-2">
@@ -2682,24 +2731,29 @@
             <div class="star"></div><div class="star"></div><div class="star"></div>
             <div class="star"></div><div class="star"></div>
           </div>
-          <p class="testi-text">
-            "We've visited the Maldives three times before, but Azalea showed us a version
-            we never knew existed. The remote atolls, the silence, the stars at night —
-            it was deeply humbling."
-          </p>
+          <p class="testi-text">"The crew exceeded my expectations in every way — outstanding in service, friendliness and professionalism. They instinctively knew our preferences before we even knew what we wanted. The sandbar meals were especially magical. Each snorkel site was like swimming in an aquarium."</p>
           <div class="testi-author">
-            <img
-              class="testi-avatar"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80"
-              alt="Emma T."
-            />
+            <img class="testi-avatar" src="https://ui-avatars.com/api/?name=Sheila+B&background=09131F&color=C9A468&bold=true&size=100" alt="Sheila B." />
             <div>
-              <div class="testi-name">Emma Thornton</div>
-              <div class="testi-origin">Sydney, Australia</div>
+              <div class="testi-name">Sheila B.</div>
+              <div class="testi-origin">January 2022</div>
             </div>
           </div>
+          <div class="testi-source"><span class="testi-source-dot"></span> via <a href="https://www.tripadvisor.com/Attraction_Review-g298571-d11912662-Reviews-Azalea_Cruise-Male.html" target="_blank" rel="noopener">Tripadvisor</a></div>
         </div>
       </div>
+
+      <!-- TripAdvisor trust strip -->
+      <div class="ta-trust reveal">
+        <div class="ta-trust-stars">★ ★ ★ ★ ★</div>
+        <p class="ta-trust-label">Rated <strong>5.0</strong> on <span class="ta-green">Tripadvisor</span> · 10 guest reviews</p>
+        <a class="ta-trust-link"
+           href="https://www.tripadvisor.com/Attraction_Review-g298571-d11912662-Reviews-Azalea_Cruise-Male.html"
+           target="_blank" rel="noopener noreferrer">
+          Read all reviews →
+        </a>
+      </div>
+
     </div>
   </section>
 
