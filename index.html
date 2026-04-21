@@ -1444,12 +1444,170 @@
     }
     .tour-room-item.active::before { content: '●'; color: var(--gold); }
 
+    /* ── Tour Threshold Section ── */
+    .tour-threshold {
+      position: relative;
+      height: 72vh;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050c14;
+    }
+    .tour-threshold-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.28;
+      animation: thresholdDrift 22s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes thresholdDrift {
+      from { transform: scale(1.0) translate(0, 0); }
+      to   { transform: scale(1.09) translate(-1.5%, -0.8%); }
+    }
+    .tour-threshold-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 30%, rgba(5,12,20,0.7) 100%),
+        linear-gradient(to bottom, rgba(5,12,20,0.55) 0%, transparent 35%, transparent 65%, rgba(5,12,20,0.75) 100%);
+    }
+    .tour-threshold-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+    .tour-threshold-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .tour-threshold-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 0.2rem;
+    }
+    .tour-threshold-sub {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2.8rem;
+    }
+    .tour-threshold-rule {
+      width: 2rem; height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+      margin: 0 auto 2.8rem;
+    }
+    .tour-threshold-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.05rem 3rem;
+      border: 1px solid var(--gold);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: transparent;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .tour-threshold-btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: scale(1.03);
+      box-shadow: 0 0 40px rgba(201,164,104,0.25);
+    }
+    .tour-threshold-btn svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      transition: stroke var(--transition);
+    }
+    .tour-threshold-meta {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.3);
+      margin-top: 2rem;
+      text-transform: uppercase;
+    }
+
+    /* ── Floating Tour Pill ── */
+    .tour-float-pill {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(5,12,20,0.92);
+      border: 1px solid rgba(201,164,104,0.55);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.45s ease, transform 0.45s ease,
+                  background 0.2s, color 0.2s, border-color 0.2s;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 32px rgba(0,0,0,0.45);
+    }
+    .tour-float-pill.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .tour-float-pill:hover {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+    .tour-float-pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      transition: background 0.2s;
+      animation: pillPulse 2.4s ease-in-out infinite;
+    }
+    .tour-float-pill:hover .tour-float-pill-dot {
+      background: var(--navy);
+      animation: none;
+    }
+    @keyframes pillPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
     @media (max-width: 768px) {
       .tour-rooms-panel { width: 100%; }
       .tour-text-wrap { left: 1.5rem; bottom: 5rem; }
       .tour-dots { left: 1.5rem; right: 1.5rem; bottom: 2rem; }
       .tour-controls-top { top: 1.2rem; left: 1.2rem; right: 1.2rem; }
       .yacht-tour-panel-title { font-size: 1.25rem; }
+      .tour-threshold { height: 60vh; min-height: 420px; }
+      .tour-float-pill { bottom: 1.2rem; right: 1.2rem; }
     }
   </style>
 </head>
@@ -1932,6 +2090,25 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CINEMATIC TOUR THRESHOLD
+  ═══════════════════════════════════════ -->
+  <section class="tour-threshold" id="tour-threshold">
+    <div class="tour-threshold-bg" id="tourThresholdBg"></div>
+    <div class="tour-threshold-vignette"></div>
+    <div class="tour-threshold-inner reveal">
+      <p class="tour-threshold-eyebrow">Private Tour</p>
+      <h2 class="tour-threshold-heading">Step Inside</h2>
+      <p class="tour-threshold-sub">The Azalea</p>
+      <div class="tour-threshold-rule"></div>
+      <button class="tour-threshold-btn" onclick="openTour(this)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+        Begin Your Tour
+      </button>
+      <p class="tour-threshold-meta" id="tourThresholdMeta"></p>
     </div>
   </section>
 
@@ -2486,12 +2663,24 @@
           roomsList.appendChild(li);
         });
 
-        // Update tour panel entry point
+        // Update yacht strip panel entry point
         const countEl = document.getElementById('tourPhotoCount');
         if (countEl) countEl.textContent = gallery.length + ' photographs';
         const panel = document.querySelector('.yacht-tour-panel');
         if (panel && gallery[0]) {
           panel.style.setProperty('--tour-panel-bg', `url('${gallery[0].image}')`);
+        }
+
+        // Update threshold section
+        const thresholdBg = document.getElementById('tourThresholdBg');
+        if (thresholdBg && gallery[0]) {
+          thresholdBg.style.backgroundImage = `url('${gallery[0].image}')`;
+        }
+        const thresholdMeta = document.getElementById('tourThresholdMeta');
+        if (thresholdMeta) {
+          const cats = [...new Set(gallery.map(g => g.category).filter(Boolean))];
+          thresholdMeta.textContent = gallery.length + ' photographs'
+            + (cats.length ? '  ·  ' + cats.join('  ·  ') : '');
         }
       };
 
@@ -2550,12 +2739,21 @@
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
         tourGo(0);
+        // Hide pill while tour is open
+        const pill = document.getElementById('tourFloatPill');
+        if (pill) pill.style.opacity = '0', pill.style.pointerEvents = 'none';
       };
 
       function closeTour() {
         clearInterval(autoTimer);
         overlay.classList.remove('open');
         document.body.style.overflow = '';
+        // Restore pill
+        const pill = document.getElementById('tourFloatPill');
+        if (pill && pill.classList.contains('visible')) {
+          pill.style.opacity = '';
+          pill.style.pointerEvents = '';
+        }
       }
 
       function openRooms()  { roomsPanel.classList.add('open'); }
@@ -2585,6 +2783,23 @@
 
     })();
 
+    // ── Floating pill visibility ──
+    (function () {
+      const pill = document.getElementById('tourFloatPill');
+      const hero = document.getElementById('hero');
+      if (!pill || !hero) return;
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            pill.classList.remove('visible');
+          } else {
+            pill.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+      obs.observe(hero);
+    })();
+
     // ── Form submit ──
     function handleSubmit(e) {
       e.preventDefault();
@@ -2609,5 +2824,12 @@
       });
     }
   </script>
+
+  <!-- Floating Tour Pill -->
+  <div class="tour-float-pill" id="tourFloatPill" onclick="openTour(this)">
+    <span class="tour-float-pill-dot"></span>
+    Begin Tour
+  </div>
+
 </body>
 </html>
