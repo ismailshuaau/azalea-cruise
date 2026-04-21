@@ -803,6 +803,179 @@
       margin-top: 4px;
     }
 
+    /* ── Accommodation ── */
+    #accommodation { background: var(--navy); }
+
+    .cabin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+    }
+
+    .cabin-card {
+      overflow: hidden;
+      background: #0a1d2e;
+    }
+
+    .cabin-card-img-wrap {
+      overflow: hidden;
+    }
+
+    .cabin-card-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .cabin-card:hover .cabin-card-img { transform: scale(1.05); }
+
+    .cabin-card-body {
+      padding: 2rem 1.8rem 2.2rem;
+    }
+    .cabin-card-type {
+      font-size: 0.57rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .cabin-card-name {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+      line-height: 1.25;
+    }
+    .cabin-card-rule {
+      width: 1.5rem; height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 1rem;
+    }
+    .cabin-card-desc {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.2rem;
+    }
+    .cabin-card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+    .cabin-card-features li {
+      font-size: 0.63rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.38);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .cabin-card-features li::before {
+      content: '◆';
+      color: var(--gold);
+      opacity: 0.45;
+      font-size: 0.38rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Tour Cabin Detail Panel ── */
+    .tour-cabin-panel {
+      position: absolute;
+      right: 2rem;
+      bottom: 4.5rem;
+      width: 260px;
+      background: rgba(5,12,20,0.9);
+      border: 1px solid rgba(201,164,104,0.2);
+      backdrop-filter: blur(14px);
+      padding: 1.5rem 1.5rem 1.3rem;
+      z-index: 12;
+      transform: translateX(calc(100% + 2.5rem));
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                  opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .tour-cabin-panel.visible {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .tour-cabin-panel-eyebrow {
+      font-size: 0.54rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.45rem;
+    }
+    .tour-cabin-panel-name {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+      line-height: 1.3;
+    }
+    .tour-cabin-panel-rule {
+      width: 1.5rem; height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 0.9rem;
+    }
+    .tour-cabin-panel-desc {
+      font-size: 0.72rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.95rem;
+    }
+    .tour-cabin-panel-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.32rem;
+      margin-bottom: 1.1rem;
+    }
+    .tour-cabin-panel-features li {
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tour-cabin-panel-features li::before {
+      content: '◆';
+      color: var(--gold);
+      opacity: 0.45;
+      font-size: 0.38rem;
+      flex-shrink: 0;
+    }
+    .tour-cabin-enquire {
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,164,104,0.3);
+      padding-bottom: 0.15rem;
+      transition: border-color var(--transition);
+    }
+    .tour-cabin-enquire:hover { border-color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .cabin-grid { grid-template-columns: 1fr; gap: 2px; }
+      .tour-cabin-panel { display: none; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .cabin-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     /* ── Destinations ── */
     #destinations {
       overflow: hidden;
@@ -1836,6 +2009,29 @@
       // Re-init slideshow with new slides/dots
       if (window.initSlideshow) window.initSlideshow();
 
+      // Accommodation cabin grid
+      const cabinGrid = document.getElementById('cabinGrid');
+      if (cabinGrid) {
+        const cabins = (c.yacht.gallery || []).filter(g => g.category === 'Cabins');
+        cabinGrid.innerHTML = '';
+        cabins.forEach(cabin => {
+          const card = document.createElement('div');
+          card.className = 'cabin-card reveal';
+          const feats = (cabin.features || []).map(f => `<li>${f}</li>`).join('');
+          card.innerHTML =
+            `<div class="cabin-card-img-wrap"><img class="cabin-card-img" src="${cabin.image}" alt="${cabin.room}" loading="lazy" /></div>` +
+            `<div class="cabin-card-body">` +
+            `<p class="cabin-card-type">Accommodation</p>` +
+            `<h3 class="cabin-card-name">${cabin.room}</h3>` +
+            `<div class="cabin-card-rule"></div>` +
+            (cabin.description ? `<p class="cabin-card-desc">${cabin.description}</p>` : '') +
+            (feats ? `<ul class="cabin-card-features">${feats}</ul>` : '') +
+            `</div>`;
+          cabinGrid.appendChild(card);
+          if (window.revealObserver) window.revealObserver.observe(card);
+        });
+      }
+
       // Cinematic tour gallery
       if (c.yacht.gallery && c.yacht.gallery.length && window.buildTour) {
         window.buildTour(c.yacht.gallery);
@@ -1856,6 +2052,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#experiences">Experiences</a></li>
         <li><a href="#yacht">The Yacht</a></li>
+        <li><a href="#accommodation">Cabins</a></li>
         <li><a href="#destinations">Destinations</a></li>
         <li><a href="#booking">Enquire</a></li>
       </ul>
@@ -1872,8 +2069,9 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#about"        onclick="toggleMenu()">About</a>
     <a href="#experiences"  onclick="toggleMenu()">Experiences</a>
-    <a href="#yacht"        onclick="toggleMenu()">The Yacht</a>
-    <a href="#destinations" onclick="toggleMenu()">Destinations</a>
+    <a href="#yacht"          onclick="toggleMenu()">The Yacht</a>
+    <a href="#accommodation"  onclick="toggleMenu()">Cabins</a>
+    <a href="#destinations"   onclick="toggleMenu()">Destinations</a>
     <a href="#booking"      onclick="toggleMenu()">Enquire</a>
   </div>
 
@@ -2151,6 +2349,27 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ACCOMMODATION
+  ═══════════════════════════════════════ -->
+  <section id="accommodation" class="section">
+    <div class="container">
+      <div class="reveal">
+        <p class="eyebrow text-white">On Board</p>
+        <h2 style="color:var(--white);">Stay in Style</h2>
+        <div class="divider"></div>
+        <p style="max-width:520px; color:rgba(255,255,255,0.5); line-height:1.8; font-size:0.95rem;">
+          Three cabin categories — each a private sanctuary. Every suite is appointed
+          with Egyptian cotton linens, en-suite bathrooms, and positioned to capture
+          the Indian Ocean at every angle.
+        </p>
+      </div>
+      <div class="cabin-grid" id="cabinGrid">
+        <!-- Populated by renderContent from gallery Cabins items -->
+      </div>
     </div>
   </section>
 
@@ -2594,6 +2813,16 @@
     <!-- Dot timeline -->
     <div class="tour-dots" id="tourDots"></div>
 
+    <!-- Cabin detail panel (visible on Cabins category slides only) -->
+    <div class="tour-cabin-panel" id="tourCabinPanel">
+      <p class="tour-cabin-panel-eyebrow">Accommodation</p>
+      <h3 class="tour-cabin-panel-name" id="tourCabinName"></h3>
+      <div class="tour-cabin-panel-rule"></div>
+      <p class="tour-cabin-panel-desc" id="tourCabinDesc"></p>
+      <ul class="tour-cabin-panel-features" id="tourCabinFeatures"></ul>
+      <a href="#booking" class="tour-cabin-enquire" onclick="closeTourFromPanel()">Enquire Now →</a>
+    </div>
+
     <!-- Rooms panel -->
     <div class="tour-rooms-panel" id="tourRoomsPanel">
       <p class="tour-rooms-label">Rooms</p>
@@ -2695,7 +2924,11 @@
 
     // ── Cinematic Tour ──
     (function () {
-      const overlay    = document.getElementById('tourOverlay');
+      const overlay      = document.getElementById('tourOverlay');
+      const cabinPanel   = document.getElementById('tourCabinPanel');
+      const cabinNameEl  = document.getElementById('tourCabinName');
+      const cabinDescEl  = document.getElementById('tourCabinDesc');
+      const cabinFeatEl  = document.getElementById('tourCabinFeatures');
       const photosWrap = document.getElementById('tourPhotos');
       const dotsWrap   = document.getElementById('tourDots');
       const roomsList  = document.getElementById('tourRoomsList');
@@ -2796,6 +3029,26 @@
 
         // Rooms list active
         roomsList.querySelectorAll('.tour-room-item').forEach(li => li.classList.toggle('active', li.textContent === item.room));
+
+        // Cabin detail panel
+        updateCabinPanel();
+      }
+
+      function updateCabinPanel() {
+        const item = gallery[current];
+        if (item && item.category === 'Cabins' && (item.description || (item.features && item.features.length))) {
+          cabinNameEl.textContent = item.room;
+          cabinDescEl.textContent = item.description || '';
+          cabinFeatEl.innerHTML   = '';
+          (item.features || []).forEach(function (f) {
+            const li = document.createElement('li');
+            li.textContent = f;
+            cabinFeatEl.appendChild(li);
+          });
+          cabinPanel.classList.add('visible');
+        } else {
+          cabinPanel.classList.remove('visible');
+        }
       }
 
       function resetAuto() {
@@ -2830,6 +3083,8 @@
           pill.style.pointerEvents = '';
         }
       }
+
+      window.closeTourFromPanel = function () { closeTour(); };
 
       function openRooms()  { roomsPanel.classList.add('open'); }
       function closeRooms() { roomsPanel.classList.remove('open'); }

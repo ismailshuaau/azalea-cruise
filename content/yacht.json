@@ -44,6 +44,30 @@
       "room": "Sun Deck",
       "caption": "360° ocean views · Open-air lounge",
       "category": "Deck"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&q=85&auto=format",
+      "room": "Ocean View Master Suite",
+      "caption": "King bed · Jacuzzi · Panoramic views",
+      "category": "Cabins",
+      "description": "The most exclusive accommodation on board. Panoramic ocean vistas from a king-size bed dressed in Egyptian cotton linens, with a private en-suite featuring a Jacuzzi bathtub and glass-enclosed rain shower.",
+      "features": ["King-size bed", "Jacuzzi bathtub", "Glass rain shower", "Separate restroom", "Panoramic ocean view", "Egyptian cotton linens"]
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1920&q=85&auto=format",
+      "room": "Ocean View Junior Suite",
+      "caption": "Queen bed · En-suite · Ocean views",
+      "category": "Cabins",
+      "description": "An elegant sanctuary with a plush queen-size bed dressed in Egyptian cotton linens. A sleek en-suite with modern fixtures and spacious shower — the perfect retreat after a day of island discovery.",
+      "features": ["Queen-size bed", "En-suite bathroom", "Spacious shower", "Ocean view", "Egyptian cotton linens"]
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1920&q=85&auto=format",
+      "room": "Superior Twin Room",
+      "caption": "Twin beds · Private bathroom · Lower deck",
+      "category": "Cabins",
+      "description": "Comfortable lower-deck cabins offering elegant comfort with modern fixtures and premium amenities. Available in twin or single configuration — ideal for friends, families, or solo adventurers.",
+      "features": ["Twin or single beds", "Private en-suite", "Modern fixtures", "Premium amenities", "Lower deck"]
     }
   ]
 }

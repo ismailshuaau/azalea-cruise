@@ -237,6 +237,17 @@ collections:
               - { label: "Room Name", name: "room", widget: "string", required: true, hint: "Main title shown on screen — e.g. Master Suite" }
               - { label: "Caption", name: "caption", widget: "string", hint: "Short line below room name — e.g. Private deck access · Ocean view" }
               - { label: "Category", name: "category", widget: "select", options: ["Exterior", "Cabins", "Dining", "Deck", "Bathrooms"], hint: "Groups photos in the Rooms side menu" }
+              - label: "Cabin Description"
+                name: "description"
+                widget: "text"
+                required: false
+                hint: "Cabins only — 2-3 sentences shown in the Accommodation section and the tour detail panel. Leave blank for non-cabin slides."
+              - label: "Cabin Features"
+                name: "features"
+                widget: "list"
+                required: false
+                hint: "Cabins only — one amenity per line (e.g. King-size bed · Jacuzzi · Ocean view). Leave blank for non-cabin slides."
+                field: { label: "Feature", name: "feature", widget: "string" }
 
   - name: "destinations"
     label: "Destinations"
