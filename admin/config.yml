@@ -64,10 +64,15 @@ collections:
             widget: "text"
             hint: "One or two sentences shown below the heading"
             required: true
+          - label: "Background Video URL"
+            name: "video_url"
+            widget: "string"
+            required: false
+            hint: "Optional — paste a direct .mp4 URL (e.g. from Cloudflare R2 or your own host). When set, the video replaces the slideshow on desktop. Leave blank to keep the photo slideshow."
           - label: "Slideshow Image 1"
             name: "slide_1"
             widget: "image"
-            hint: "Landscape photo, at least 1920 × 1080 px"
+            hint: "Landscape photo, at least 1920 × 1080 px. Shown on mobile and when no video is set."
             required: true
           - label: "Slideshow Image 2"
             name: "slide_2"
