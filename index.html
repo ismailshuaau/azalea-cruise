@@ -403,6 +403,78 @@
       font-weight: 300;
     }
 
+    /* ── Rotating taglines ── */
+    .hero-rotating-wrap {
+      position: relative;
+      height: 1.3em;
+      margin: 1rem 0 2rem;
+      overflow: hidden;
+    }
+    .hero-rotating-item {
+      position: absolute;
+      top: 0; left: 0;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      opacity: 0;
+      transition: opacity 0.9s ease;
+      white-space: nowrap;
+      font-family: var(--font-sans);
+      font-weight: 400;
+    }
+    .hero-rotating-item.active { opacity: 1; }
+
+    /* ── Payment flexibility ── */
+    .payment-flex {
+      margin-top: 1.6rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(201,164,104,0.12);
+    }
+    .payment-flex-label {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 0.85rem;
+    }
+    .payment-flex-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .payment-coin {
+      width: 26px; height: 26px;
+      border: 1px solid rgba(201,164,104,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: rgba(201,164,104,0.55);
+      line-height: 1;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .payment-coin:hover {
+      border-color: rgba(201,164,104,0.7);
+      color: rgba(201,164,104,0.9);
+    }
+    .payment-flex-also {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.18);
+      margin-left: 0.3rem;
+    }
+
+    /* ── Footer payment line ── */
+    .footer-payment {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.2rem;
+    }
+
     .hero-actions {
       display: flex;
       gap: 1.2rem;
@@ -1830,6 +1902,11 @@
           Discover the Maldives aboard Azalea — an intimate luxury yacht offering
           bespoke island-hopping adventures through the world's most pristine waters.
         </p>
+        <div class="hero-rotating-wrap" aria-hidden="true">
+          <span class="hero-rotating-item active">Your Key to Luxury Yacht Charter</span>
+          <span class="hero-rotating-item">The Ultimate Way to Explore the Islands</span>
+          <span class="hero-rotating-item">Your Gateway to Exquisite Luxury in the Maldives</span>
+        </div>
         <div class="hero-actions">
           <a href="#booking" class="btn btn-solid">Book Your Voyage</a>
           <a href="#experiences" class="btn btn-white">Explore Experiences</a>
@@ -2361,6 +2438,19 @@
               Send Enquiry
             </button>
           </form>
+
+          <div class="payment-flex">
+            <span class="payment-flex-label">Payment flexibility</span>
+            <div class="payment-flex-row">
+              <span class="payment-coin" title="Bitcoin">₿</span>
+              <span class="payment-coin" title="Ethereum">Ξ</span>
+              <span class="payment-coin" title="Litecoin">Ł</span>
+              <span class="payment-coin" title="Dash">◎</span>
+              <span class="payment-coin" title="USDC">$</span>
+              <span class="payment-coin" title="Bitcoin Cash">Ƀ</span>
+              <span class="payment-flex-also">· Wire transfer · All major cards</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2451,6 +2541,7 @@
       </div>
 
       <div class="footer-bottom">
+        <p class="footer-payment">Accepted: ₿&nbsp;&nbsp;Ξ&nbsp;&nbsp;Ł&nbsp;&nbsp;◎&nbsp;&nbsp;USDC&nbsp;&nbsp;Ƀ &nbsp;·&nbsp; Wire transfer &nbsp;·&nbsp; All major cards</p>
         <p class="footer-copy">© 2026 Azalea Cruise. All rights reserved. Malé, Maldives.</p>
         <div class="footer-legal">
           <a href="#">Privacy Policy</a>
@@ -2807,6 +2898,18 @@
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
+    })();
+
+    // ── Hero rotating taglines ──
+    (function () {
+      var items = document.querySelectorAll('.hero-rotating-item');
+      if (items.length < 2) return;
+      var cur = 0;
+      setInterval(function () {
+        items[cur].classList.remove('active');
+        cur = (cur + 1) % items.length;
+        items[cur].classList.add('active');
+      }, 3800);
     })();
 
     // ── Floating pill visibility ──
