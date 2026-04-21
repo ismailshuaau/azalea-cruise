@@ -662,6 +662,87 @@
       object-fit: cover;
     }
 
+    .yacht-tour-panel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/2;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background var(--transition);
+      border: 1px solid rgba(201,164,104,0.15);
+    }
+    .yacht-tour-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: var(--tour-panel-bg, none);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+      transition: opacity var(--transition);
+    }
+    .yacht-tour-panel:hover { background: #0a1724; }
+    .yacht-tour-panel:hover::before { opacity: 0.22; }
+    .yacht-tour-panel:hover .yacht-tour-panel-btn {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .yacht-tour-panel-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .yacht-tour-panel-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+    }
+    .yacht-tour-panel-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .yacht-tour-panel-count {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1.4rem;
+    }
+    .yacht-tour-panel-rule {
+      width: 1.5rem;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.4rem;
+      opacity: 0.6;
+    }
+    .yacht-tour-panel-btn {
+      display: inline-block;
+      padding: 0.55rem 1.5rem;
+      border: 1px solid var(--gold);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: transparent;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+
     /* ── Destinations ── */
     #destinations {
       overflow: hidden;
@@ -1113,47 +1194,6 @@
 
     /* ── Cinematic Tour ── */
 
-    /* Invitation card */
-    .tour-invite {
-      margin-top: 5rem;
-      display: flex;
-      justify-content: center;
-    }
-    .tour-invite-card {
-      border: 1px solid rgba(201,164,104,0.25);
-      padding: 3rem 4rem;
-      text-align: center;
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(6px);
-      max-width: 380px;
-      width: 100%;
-      transition: border-color var(--transition), background var(--transition);
-    }
-    .tour-invite-card:hover {
-      border-color: rgba(201,164,104,0.5);
-      background: rgba(255,255,255,0.04);
-    }
-    .tour-invite-eyebrow {
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
-    }
-    .tour-invite-name {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-    }
-    .tour-invite-rule {
-      width: 2rem; height: 1px;
-      background: var(--gold);
-      margin: 0 auto 1.8rem;
-    }
-
     /* Overlay */
     .tour-overlay {
       position: fixed;
@@ -1409,7 +1449,7 @@
       .tour-text-wrap { left: 1.5rem; bottom: 5rem; }
       .tour-dots { left: 1.5rem; right: 1.5rem; bottom: 2rem; }
       .tour-controls-top { top: 1.2rem; left: 1.2rem; right: 1.2rem; }
-      .tour-invite-card { padding: 2.5rem 2rem; }
+      .yacht-tour-panel-title { font-size: 1.25rem; }
     }
   </style>
 </head>
@@ -1547,7 +1587,6 @@
       q('.yacht-img-main').src = c.yacht.image_main;
       const strips = qq('.yacht-img-strip img');
       if (strips[0]) strips[0].src = c.yacht.image_strip_1;
-      if (strips[1]) strips[1].src = c.yacht.image_strip_2;
 
       // Destinations
       qq('.dest-card').forEach((card, i) => {
@@ -1880,21 +1919,16 @@
               src="https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg"
               alt="Azalea yacht at night with lights"
             />
-            <img
-              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80&auto=format"
-              alt="Scuba diving Maldives coral reef"
-            />
+            <div class="yacht-tour-panel" onclick="openTour(this)">
+              <div class="yacht-tour-panel-inner">
+                <p class="yacht-tour-panel-eyebrow">Private Tour</p>
+                <h3 class="yacht-tour-panel-title">The Azalea</h3>
+                <div class="yacht-tour-panel-rule"></div>
+                <span class="yacht-tour-panel-count" id="tourPhotoCount"></span>
+                <button class="yacht-tour-panel-btn">Begin Tour &nbsp;→</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Tour invitation card -->
-      <div class="tour-invite reveal">
-        <div class="tour-invite-card">
-          <p class="tour-invite-eyebrow">Private Tour</p>
-          <h3 class="tour-invite-name">The Azalea</h3>
-          <div class="tour-invite-rule"></div>
-          <button class="btn btn-gold" onclick="openTour(this)">Begin Tour &nbsp;→</button>
         </div>
       </div>
 
@@ -2451,6 +2485,14 @@
           li.addEventListener('click', () => { tourGo(parseInt(li.dataset.index)); closeRooms(); });
           roomsList.appendChild(li);
         });
+
+        // Update tour panel entry point
+        const countEl = document.getElementById('tourPhotoCount');
+        if (countEl) countEl.textContent = gallery.length + ' photographs';
+        const panel = document.querySelector('.yacht-tour-panel');
+        if (panel && gallery[0]) {
+          panel.style.setProperty('--tour-panel-bg', `url('${gallery[0].image}')`);
+        }
       };
 
       /* ── Navigate ── */
