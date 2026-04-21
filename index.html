@@ -28,12 +28,25 @@
       --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      /* Ocean Depth Descent — visible through dark sections as user scrolls deeper */
+      background: linear-gradient(
+        to bottom,
+        #0a3d5c  0%,
+        #062c48 18%,
+        #041c35 42%,
+        #050c14 65%,
+        #020810 100%
+      );
+      background-attachment: fixed;
+    }
 
     body {
       font-family: var(--font-sans);
       color: var(--navy);
-      background: var(--white);
+      background: transparent;
       overflow-x: hidden;
     }
 
@@ -68,8 +81,8 @@
 
     /* ── Utility ── */
     .container  { max-width: 1220px; margin: 0 auto; padding: 0 2rem; }
-    .section    { padding: 8rem 0; }
-    .section-sm { padding: 5rem 0; }
+    .section    { padding: 8rem 0; background: var(--white); }
+    .section-sm { padding: 5rem 0; background: var(--white); }
     .text-white { color: var(--white); }
     .text-white p { color: rgba(255,255,255,0.7); }
     .divider    { width: 3rem; height: 1px; background: var(--gold); margin: 1.5rem 0; }
@@ -251,16 +264,74 @@
     .hero-slide {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       opacity: 0;
       transition: opacity 1.6s ease;
     }
-
     .hero-slide.active {
       opacity: 1;
       animation: heroZoom 9s ease-out forwards;
+    }
+
+    /* ── Horizon Lock layers ── */
+    .hs-sky-wrap, .hs-ocean-wrap {
+      position: absolute;
+      left: 0; right: 0;
+      height: 50%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hs-sky-wrap   { top: 0; }
+    .hs-ocean-wrap { bottom: 0; }
+
+    /* Each layer is sized to match the full hero height
+       so background-size:cover renders identically to the
+       original full-slide image. */
+    .hs-sky, .hs-ocean {
+      position: absolute;
+      left: 0; right: 0;
+      height: 200%; /* = 100 % of hero within the 50 % clip wrapper */
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      will-change: transform;
+    }
+    .hs-sky   { top: 0; }
+    .hs-ocean { bottom: 0; }
+
+    /* Soft fade toward the horizon so the split feels intentional */
+    .hs-sky {
+      -webkit-mask-image: linear-gradient(to bottom, black 52%, transparent 100%);
+              mask-image: linear-gradient(to bottom, black 52%, transparent 100%);
+    }
+    .hs-ocean {
+      -webkit-mask-image: linear-gradient(to top, black 52%, transparent 100%);
+              mask-image: linear-gradient(to top, black 52%, transparent 100%);
+    }
+
+    /* The luminous horizon line — stays pinned at 50 % of hero */
+    .hs-horizon {
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 1px;
+      transform: translateY(-0.5px);
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(201,164,104,0.18) 12%,
+        rgba(255,248,220,0.55) 38%,
+        rgba(255,255,255,0.75) 50%,
+        rgba(255,248,220,0.55) 62%,
+        rgba(201,164,104,0.18) 88%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hs-horizon::after {
+      content: '';
+      position: absolute;
+      inset: -8px -5% -8px -5%;
+      background: radial-gradient(ellipse at center, rgba(201,164,104,0.06) 0%, transparent 70%);
     }
 
     .hero-overlay {
@@ -422,12 +493,14 @@
       width: 100%;
       aspect-ratio: 4/5;
       object-fit: cover;
+      will-change: transform;
     }
 
     .about-img-accent {
       position: absolute;
       bottom: -3rem;
       right: -2.5rem;
+      will-change: transform;
       width: 55%;
       aspect-ratio: 4/3;
       object-fit: cover;
@@ -647,6 +720,7 @@
       width: 100%;
       aspect-ratio: 5/4;
       object-fit: cover;
+      will-change: transform;
     }
 
     .yacht-img-strip {
@@ -1586,10 +1660,14 @@
       const dotsEl = q('.hero-dots');
       dotsEl.innerHTML = '';
       ['slide_1', 'slide_2', 'slide_3', 'slide_4'].forEach((key, i) => {
-        const div = document.createElement('div');
-        div.className = 'hero-slide' + (i === 0 ? ' active' : '');
-        div.style.backgroundImage = `url('${c.hero[key]}')`;
-        heroBg.insertBefore(div, overlay);
+        const bg = `url('${c.hero[key]}')`;
+        const slide = document.createElement('div');
+        slide.className = 'hero-slide' + (i === 0 ? ' active' : '');
+        slide.innerHTML =
+          `<div class="hs-sky-wrap"><div class="hs-sky" style="background-image:${bg}"></div></div>` +
+          `<div class="hs-ocean-wrap"><div class="hs-ocean" style="background-image:${bg}"></div></div>` +
+          `<div class="hs-horizon"></div>`;
+        heroBg.insertBefore(slide, overlay);
         const dot = document.createElement('span');
         dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
         dotsEl.appendChild(dot);
@@ -1732,10 +1810,10 @@
   ═══════════════════════════════════════ -->
   <section id="hero">
     <div class="hero-bg">
-      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1920&q=85&auto=format')"></div>
-      <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/00c9d0_8bc0d55e004a4648b15be729c22389af~mv2.png')"></div>
-      <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg')"></div>
+      <div class="hero-slide active"><div class="hs-sky-wrap"><div class="hs-sky" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1920&q=85&auto=format')"></div></div><div class="hs-ocean-wrap"><div class="hs-ocean" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1920&q=85&auto=format')"></div></div><div class="hs-horizon"></div></div>
+      <div class="hero-slide"><div class="hs-sky-wrap"><div class="hs-sky" style="background-image:url('https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg')"></div></div><div class="hs-ocean-wrap"><div class="hs-ocean" style="background-image:url('https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg')"></div></div><div class="hs-horizon"></div></div>
+      <div class="hero-slide"><div class="hs-sky-wrap"><div class="hs-sky" style="background-image:url('https://static.wixstatic.com/media/00c9d0_8bc0d55e004a4648b15be729c22389af~mv2.png')"></div></div><div class="hs-ocean-wrap"><div class="hs-ocean" style="background-image:url('https://static.wixstatic.com/media/00c9d0_8bc0d55e004a4648b15be729c22389af~mv2.png')"></div></div><div class="hs-horizon"></div></div>
+      <div class="hero-slide"><div class="hs-sky-wrap"><div class="hs-sky" style="background-image:url('https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg')"></div></div><div class="hs-ocean-wrap"><div class="hs-ocean" style="background-image:url('https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg')"></div></div><div class="hs-horizon"></div></div>
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-dots">
@@ -1799,11 +1877,13 @@
         <div class="about-images reveal">
           <img
             class="about-img-main"
+            data-depth="0.12"
             src="https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg"
             alt="Azalea Cruise Yacht in the Maldives"
           />
           <img
             class="about-img-accent"
+            data-depth="0.30"
             src="https://static.wixstatic.com/media/00c9d0_0eff52e1eeb74088a771d039ce5cb209~mv2.jpg"
             alt="Azalea yacht at night"
           />
@@ -1982,6 +2062,7 @@
         <div class="yacht-visuals reveal reveal-delay-2">
           <img
             class="yacht-img-main"
+            data-depth="0.16"
             src="https://static.wixstatic.com/media/00c9d0_ab5c851507cd45818be55eb0e73db53a~mv2.jpg"
             alt="Azalea yacht aerial view"
           />
@@ -2002,7 +2083,7 @@
   <section class="tour-threshold" id="tour-threshold">
     <div class="tour-threshold-bg" id="tourThresholdBg"></div>
     <div class="tour-threshold-vignette"></div>
-    <div class="tour-threshold-inner reveal">
+    <div class="tour-threshold-inner reveal" data-depth="-0.05">
       <p class="tour-threshold-eyebrow">Private Tour</p>
       <h2 class="tour-threshold-heading">Step Inside</h2>
       <p class="tour-threshold-sub">The Azalea</p>
@@ -2676,6 +2757,56 @@
         if (Math.abs(dx) > 50) tourGo(dx < 0 ? current + 1 : current - 1);
       });
 
+    })();
+
+    // ── Parallax: Horizon Lock + Multi-layer Depth + Gyroscope ──
+    (function () {
+      const heroEl  = document.getElementById('hero');
+      const isMob   = window.matchMedia('(max-width: 767px)').matches;
+      let gyroX = 0, gyroY = 0;
+
+      /* ── Gyroscope (mobile) ── */
+      if (isMob && window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function (e) {
+          // gamma = left/right tilt (-90 to 90), beta = forward/back (0 to 180)
+          gyroX = Math.max(-1, Math.min(1, (e.gamma || 0) / 35)) * 14;
+          gyroY = Math.max(-1, Math.min(1, ((e.beta  || 45) - 45) / 35)) * 8;
+        }, { passive: true });
+      }
+
+      /* ── RAF tick ── */
+      function tick() {
+        const sy = window.scrollY;
+
+        /* Horizon Lock — only while hero is on screen */
+        if (heroEl) {
+          const heroH   = heroEl.offsetHeight;
+          const bounded = Math.min(sy, heroH);
+          const skyOff  = -(bounded * 0.17) + gyroY;
+          const seaOff  =   bounded * 0.13  - gyroY;
+          const tiltX   = gyroX;
+          document.querySelectorAll('.hs-sky').forEach(function (el) {
+            el.style.transform = 'translateY(' + skyOff.toFixed(2) + 'px) translateX(' + (-tiltX).toFixed(2) + 'px)';
+          });
+          document.querySelectorAll('.hs-ocean').forEach(function (el) {
+            el.style.transform = 'translateY(' + seaOff.toFixed(2) + 'px) translateX(' + tiltX.toFixed(2) + 'px)';
+          });
+        }
+
+        /* Multi-layer depth (desktop only) */
+        if (!isMob) {
+          document.querySelectorAll('[data-depth]').forEach(function (el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+            var rate = parseFloat(el.dataset.depth);
+            var mid  = rect.top + rect.height / 2 - window.innerHeight / 2;
+            el.style.transform = 'translateY(' + (mid * rate).toFixed(2) + 'px)';
+          });
+        }
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     })();
 
     // ── Floating pill visibility ──
